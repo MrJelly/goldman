@@ -42,7 +42,6 @@ var goldman;
             this.gameManager = new goldman.GameManager();
             this.gameManager.addEventListener(goldman.GameManager.LEVEL_MANAGER_EVENT, this.onGameManagerEventHandler, this);
             this.gameManager.addEventListener(goldman.GameManager.START_GO_EVENT, this.clickStartGo, this);
-            console.log("5555555");
             this.addChild(this.gameManager);
             this.gameManager.createObjs();
             this.gameManager.setGoalText(this.levelArr[this.currLevel - 1].goal);
@@ -72,7 +71,9 @@ var goldman;
         };
         GameContainer.prototype.gameTimerComFunc = function (e) {
             this.gameManager.setTimeText(this.LEVEL_TIME - e.target.currentCount);
-            this.nextLevel();
+            // this.nextLevel();
+            this.objManager.destroy();
+            this.removeChild(this.objManager);
         };
         GameContainer.prototype.nextLevel = function () {
             console.log("nextLevel");
