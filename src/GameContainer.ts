@@ -82,7 +82,7 @@ module goldman {
 
         private gameTimerComFunc(e: egret.TimerEvent): void {
             this.gameManager.setTimeText(this.LEVEL_TIME - e.target.currentCount);
-            this.nextLevel();
+            // this.nextLevel();
         }
 
         private nextLevel(): void {
