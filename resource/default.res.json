@@ -1,0 +1,120 @@
+{
+	"groups": [
+		{
+			"keys": "description_json,Gold1_Back,Gold2,Gold2_Back,Gold3,Gold3_Back,hero_png,hook_png,Kulou_Back_png,LevelPanel_png,mouse_png,Mouse_Back_png,mouseDiamond_png,objsConfig_json,play_btn_png,back_btn_png,bg_png,bgall_png,diamond_png,Diamond_Back_png,Gold1,Level_json",
+			"name": "preload"
+		}
+	],
+	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
+		{
+			"url": "assets/Gold1_Back.png",
+			"type": "image",
+			"name": "Gold1_Back"
+		},
+		{
+			"url": "assets/gold2.png",
+			"type": "image",
+			"name": "Gold2"
+		},
+		{
+			"url": "assets/gold2_back.png",
+			"type": "image",
+			"name": "Gold2_Back"
+		},
+		{
+			"url": "assets/gold3.png",
+			"type": "image",
+			"name": "Gold3"
+		},
+		{
+			"url": "assets/gold3_back.png",
+			"type": "image",
+			"name": "Gold3_Back"
+		},
+		{
+			"url": "assets/hero.png",
+			"type": "image",
+			"name": "hero_png"
+		},
+		{
+			"url": "assets/hook.png",
+			"type": "image",
+			"name": "hook_png"
+		},
+		{
+			"url": "assets/Kulou_Back.png",
+			"type": "image",
+			"name": "Kulou_Back_png"
+		},
+		{
+			"url": "assets/LevelPanel.png",
+			"type": "image",
+			"name": "LevelPanel_png"
+		},
+		{
+			"url": "assets/mouse.png",
+			"type": "image",
+			"name": "mouse_png"
+		},
+		{
+			"url": "assets/Mouse_Back.png",
+			"type": "image",
+			"name": "Mouse_Back_png"
+		},
+		{
+			"url": "assets/mouseDiamond.png",
+			"type": "image",
+			"name": "mouseDiamond_png"
+		},
+		{
+			"url": "assets/objsConfig.json",
+			"type": "json",
+			"name": "objsConfig_json"
+		},
+		{
+			"url": "assets/play_btn.png",
+			"type": "image",
+			"name": "play_btn_png"
+		},
+		{
+			"url": "assets/back_btn.png",
+			"type": "image",
+			"name": "back_btn_png"
+		},
+		{
+			"url": "assets/bg.png",
+			"type": "image",
+			"name": "bg_png"
+		},
+		{
+			"url": "assets/bgall.png",
+			"type": "image",
+			"name": "bgall_png"
+		},
+		{
+			"url": "assets/diamond.png",
+			"type": "image",
+			"name": "diamond_png"
+		},
+		{
+			"url": "assets/Diamond_Back.png",
+			"type": "image",
+			"name": "Diamond_Back_png"
+		},
+		{
+			"url": "assets/gold1.png",
+			"type": "image",
+			"name": "Gold1"
+		},
+		{
+			"url": "assets/Level.json",
+			"type": "json",
+			"name": "Level_json"
+		}
+	]
+}

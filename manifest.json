@@ -1,0 +1,28 @@
+{
+	"initial": [
+		"libs/modules/egret/egret.js",
+		"libs/modules/egret/egret.web.js",
+		"libs/modules/game/game.js",
+		"libs/modules/tween/tween.js",
+		"libs/modules/assetsmanager/assetsmanager.js",
+		"libs/modules/promise/promise.js",
+		"libs/WXCloudApi/WXCloudApi.js",
+		"libs/egretmgobe/egretmgobe.js"
+	],
+	"game": [
+		"bin-debug/mc/Obj.js",
+		"bin-debug/mc/Gold1.js",
+		"bin-debug/LoadingUI.js",
+		"bin-debug/Main.js",
+		"bin-debug/Platform.js",
+		"bin-debug/mc/BombBtn.js",
+		"bin-debug/mc/GameManager.js",
+		"bin-debug/GameUtil.js",
+		"bin-debug/mc/Gold2.js",
+		"bin-debug/mc/Gold3.js",
+		"bin-debug/mc/Hook.js",
+		"bin-debug/mc/HookManager.js",
+		"bin-debug/GameContainer.js",
+		"bin-debug/mc/ObjManager.js"
+	]
+}
