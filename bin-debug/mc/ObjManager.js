@@ -67,6 +67,7 @@ var goldman;
             }
         };
         ObjManager.prototype.removeObj = function (obj) {
+            console.log("从数组中removeObj");
             var currHookObj = this._objsArr.splice(this._objsArr.indexOf(obj), 1)[0];
             this.removeChild(currHookObj);
             return currHookObj;

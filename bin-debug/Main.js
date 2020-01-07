@@ -116,7 +116,7 @@ var Main = (function (_super) {
                     case 0:
                         _a.trys.push([0, 3, , 4]);
                         loadingView = new LoadingUI();
-                        console.log("========.loadResource");
+                        console.log("========>loadResource");
                         this.stage.addChild(loadingView);
                         return [4 /*yield*/, RES.loadConfig("resource/default.res.json", "resource/")];
                     case 1:

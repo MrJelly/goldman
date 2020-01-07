@@ -10,20 +10,16 @@
       "name": "egret"
     },
     {
-      "name": "game"
-    },
-    {
-      "name": "tween"
+      "name": "eui"
     },
     {
       "name": "assetsmanager"
     },
     {
-      "name": "promise"
+      "name": "tween"
     },
     {
-      "name": "WXCloudApi",
-      "path": "./libs/WXCloudApi"
+      "name": "promise"
     },
     {
       "name": "egretmgobe",

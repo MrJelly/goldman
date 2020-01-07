@@ -55,6 +55,7 @@ var goldman;
             this.addChild(this.hookManager);
             this.hookManager.x = GameContainer.thisW / 2;
             this.hookManager.y = 158;
+            this.msgbox = new goldman.Msgbox();
             // this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStage, this); //点击勾取
             this.addEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
             this.createGameTimeInterval();
@@ -71,15 +72,23 @@ var goldman;
         };
         GameContainer.prototype.gameTimerComFunc = function (e) {
             this.gameManager.setTimeText(this.LEVEL_TIME - e.target.currentCount);
-            // this.nextLevel();
+            this.gameOver();
+        };
+        GameContainer.prototype.gameOver = function () {
+            console.log("gameOver!!!");
+            // this.destoryGameScene();
+            // this.currLevel++;
+            // this.createGameScene();
+            var that = this;
             this.objManager.destroy();
             this.removeChild(this.objManager);
-        };
-        GameContainer.prototype.nextLevel = function () {
-            console.log("nextLevel");
-            this.destoryGameScene();
-            this.currLevel++;
-            this.createGameScene();
+            var timeOut = setTimeout(function () {
+                //执行事件
+                console.log("alert msgbox!!!!!");
+                that.addChild(that.msgbox);
+                that.msgbox.setScoreText(28);
+                clearTimeout(timeOut);
+            }, that, 500);
         };
         GameContainer.prototype.destoryGameScene = function () {
             this.gameManager.removeEventListener(goldman.GameManager.START_GO_EVENT, this.clickStartGo, this);
@@ -145,8 +154,10 @@ var goldman;
                         }, 300);
                     }
                     else {
+                        console.log("碰撞=====》》》");
                         me.hookManager.setHookBackV(obj.backV);
                         me.hookManager.setCatchObj(obj);
+                        me.objManager.removeObj(obj);
                         obj.destory();
                     }
                     break;

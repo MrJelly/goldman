@@ -66,6 +66,7 @@ var goldman;
             configurable: true
         });
         Obj.prototype.destory = function () {
+            console.log("物体销毁");
             this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
             goldman.removeAllchild(this);
         };

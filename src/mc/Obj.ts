@@ -57,6 +57,7 @@ module goldman {
 		}
 
 		public destory():void {
+			console.log("物体销毁")
 			this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
 			removeAllchild(this);
 		}

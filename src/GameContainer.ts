@@ -18,6 +18,7 @@ module goldman {
         private hookManager: HookManager;
         private objManager: ObjManager;
         private gameManager: GameManager;
+        private msgbox: Msgbox;
 
         public constructor() {
             super();
@@ -44,7 +45,7 @@ module goldman {
             this.gameManager = new GameManager();
             this.gameManager.addEventListener(GameManager.LEVEL_MANAGER_EVENT, this.onGameManagerEventHandler, this);
             this.gameManager.addEventListener(GameManager.START_GO_EVENT, this.clickStartGo, this)
-            
+
             this.addChild(this.gameManager);
             this.gameManager.createObjs();
             this.gameManager.setGoalText(this.levelArr[this.currLevel - 1].goal);
@@ -61,6 +62,10 @@ module goldman {
             this.addChild(this.hookManager);
             this.hookManager.x = GameContainer.thisW / 2;
             this.hookManager.y = 158;
+
+            this.msgbox = new Msgbox();
+            
+            
 
             // this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStage, this); //点击勾取
             this.addEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
@@ -82,16 +87,26 @@ module goldman {
 
         private gameTimerComFunc(e: egret.TimerEvent): void {
             this.gameManager.setTimeText(this.LEVEL_TIME - e.target.currentCount);
-            // this.nextLevel();
+            this.gameOver();
+
+
+
+        }
+        private gameOver(): void {
+            console.log("gameOver!!!");
+            // this.destoryGameScene();
+            // this.currLevel++;
+            // this.createGameScene();
+            var that = this
             this.objManager.destroy();
             this.removeChild(this.objManager);
-        }
-
-        private nextLevel(): void {
-            console.log("nextLevel");
-            this.destoryGameScene();
-            this.currLevel++;
-            this.createGameScene();
+            var timeOut: number = setTimeout(function () {
+                //执行事件
+                console.log("alert msgbox!!!!!")
+                that.addChild(that.msgbox);
+                that.msgbox.setScoreText(28);
+                clearTimeout(timeOut);
+            }, that, 500);
         }
 
         private destoryGameScene(): void {
@@ -102,7 +117,7 @@ module goldman {
             this.removeChild(this.objManager);
             this.hookManager.destroy();
             this.removeChild(this.hookManager);
-            
+
             // this.stage.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStage, this);
             this.removeEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
             this.levelTimer.removeEventListener(egret.TimerEvent.TIMER, this.gameTimerFunc, this);
@@ -163,8 +178,10 @@ module goldman {
                             obj.destory();
                         }, 300);
                     } else {
+                        console.log("碰撞=====》》》")
                         me.hookManager.setHookBackV(obj.backV);
                         me.hookManager.setCatchObj(obj);
+                        me.objManager.removeObj(obj);
                         obj.destory();
                     }
                     break;
