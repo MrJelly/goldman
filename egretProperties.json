@@ -20,10 +20,6 @@
     },
     {
       "name": "promise"
-    },
-    {
-      "name": "egretmgobe",
-      "path": "./libs/egretmgobe"
     }
   ]
 }

@@ -17,12 +17,12 @@
 		"bin-debug/ThemeAdapter.js",
 		"bin-debug/mc/BombBtn.js",
 		"bin-debug/GameContainer.js",
+		"bin-debug/mc/GameOver.js",
 		"bin-debug/mc/Gold1.js",
 		"bin-debug/mc/Gold2.js",
 		"bin-debug/mc/Gold3.js",
 		"bin-debug/mc/Hook.js",
 		"bin-debug/mc/HookManager.js",
-		"bin-debug/mc/Msgbox.js",
 		"bin-debug/AssetAdapter.js",
 		"bin-debug/mc/ObjManager.js"
 	]

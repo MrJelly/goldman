@@ -1,11 +1,16 @@
 {
 	"groups": [
 		{
-			"keys": "Gold1_Back,Gold2,Gold2_Back,Gold3,Gold3_Back,hero_png,hook_png,Kulou_Back_png,LevelPanel_png,mouse_png,Mouse_Back_png,mouseDiamond_png,objsConfig_json,play_btn_png,back_btn_png,bg_png,bgall_png,diamond_png,Diamond_Back_png,Gold1,Level_json,msgboxbg_png,clearok_png,monster1_png,over_png",
+			"keys": "description_json,Gold1_Back,Gold2,Gold2_Back,Gold3,Gold3_Back,hero_png,hook_png,Kulou_Back_png,LevelPanel_png,mouse_png,Mouse_Back_png,mouseDiamond_png,objsConfig_json,play_btn_png,back_btn_png,bg_png,bgall_png,diamond_png,Diamond_Back_png,Gold1,Level_json,msgboxbg_png,clearok_png,monster1_png,over_png",
 			"name": "preload"
 		}
 	],
 	"resources": [
+		{
+			"url": "config/description.json",
+			"type": "json",
+			"name": "description_json"
+		},
 		{
 			"url": "assets/Gold1_Back.png",
 			"type": "image",

@@ -66,6 +66,7 @@ var goldman;
             this.direction = "stop";
         };
         HookManager.prototype.onUpdateGo = function () {
+            console.log("ddddddd");
             var vHeight = this.goV;
             if (this.isBack) {
                 vHeight = -this.backV;
@@ -110,6 +111,7 @@ var goldman;
             this.hook.setBackHookType(typeStr);
         };
         HookManager.prototype.destroy = function () {
+            console.log("删除hook");
             this.hook.destroy();
             this.removeChild(this.hook);
             this.hook = null;

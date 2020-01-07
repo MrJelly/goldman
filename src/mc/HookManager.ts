@@ -74,6 +74,7 @@ module goldman {
 		}
 
 		private onUpdateGo():void {
+			console.log("ddddddd")
 			var vHeight = this.goV;
 			if (this.isBack) {
 				vHeight = -this.backV;
@@ -125,6 +126,7 @@ module goldman {
 		}
 
 		public destroy():void {
+			console.log("删除hook")
 			this.hook.destroy();
 			this.removeChild(this.hook);
 			this.hook = null;

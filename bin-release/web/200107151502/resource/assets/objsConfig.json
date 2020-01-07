@@ -1,0 +1,14 @@
+{
+  "Gold1": {
+    "money": 10,
+    "backV": 8
+  },
+  "Gold2": {
+    "money": 20,
+    "backV": 6
+  },
+  "Gold3": {
+    "money": 30,
+    "backV": 4
+  }
+}

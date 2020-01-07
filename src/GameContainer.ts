@@ -18,7 +18,7 @@ module goldman {
         private hookManager: HookManager;
         private objManager: ObjManager;
         private gameManager: GameManager;
-        private msgbox: Msgbox;
+        private gameOver: GameOver;
 
         public constructor() {
             super();
@@ -63,9 +63,9 @@ module goldman {
             this.hookManager.x = GameContainer.thisW / 2;
             this.hookManager.y = 158;
 
-            this.msgbox = new Msgbox();
-            
-            
+            this.gameOver = new GameOver();
+
+
 
             // this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStage, this); //点击勾取
             this.addEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
@@ -87,12 +87,12 @@ module goldman {
 
         private gameTimerComFunc(e: egret.TimerEvent): void {
             this.gameManager.setTimeText(this.LEVEL_TIME - e.target.currentCount);
-            this.gameOver();
+            this.onGameOver();
 
 
 
         }
-        private gameOver(): void {
+        private onGameOver(): void {
             console.log("gameOver!!!");
             // this.destoryGameScene();
             // this.currLevel++;
@@ -103,10 +103,15 @@ module goldman {
             var timeOut: number = setTimeout(function () {
                 //执行事件
                 console.log("alert msgbox!!!!!")
-                that.addChild(that.msgbox);
-                that.msgbox.setScoreText(28);
+                that.addChild(that.gameOver);
+                that.gameOver.setScoreText(28);
+                that.gameOver.addEventListener(GameOver.CLOSE_GAMEOVER_EVENT, that.onDestroyGameOver, that)
                 clearTimeout(timeOut);
             }, that, 500);
+        }
+        private onDestroyGameOver(e: egret.Event) {
+            this.gameOver.removeEventListener(GameOver.CLOSE_GAMEOVER_EVENT, this.onDestroyGameOver, this)
+            this.removeChild(this.gameOver);
         }
 
         private destoryGameScene(): void {

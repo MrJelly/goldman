@@ -80,12 +80,25 @@ class Main extends egret.DisplayObjectContainer {
             console.log("========>loadResource")
             this.stage.addChild(loadingView);
             await RES.loadConfig("resource/default.res.json", "resource/");
+            await this.loadTheme();
             await RES.loadGroup("preload", 0, loadingView);
             this.stage.removeChild(loadingView);
         }
         catch (e) {
             console.error(e);
         }
+    }
+
+    private loadTheme() {
+        return new Promise((resolve, reject) => {
+            // load skin theme configuration file, you can manually modify the file. And replace the default skin.
+            //加载皮肤主题配置文件,可以手动修改这个文件。替换默认皮肤。
+            let theme = new eui.Theme("resource/default.thm.json", this.stage);
+            theme.addEventListener(eui.UIEvent.COMPLETE, () => {
+                resolve();
+            }, this);
+
+        })
     }
 
     private textfield: egret.TextField;
@@ -95,11 +108,11 @@ class Main extends egret.DisplayObjectContainer {
      * Create a game scene
      */
     private createGameScene() {
-        
 
-        var gameContainer:goldman.GameContainer = new goldman.GameContainer();
+
+        var gameContainer: goldman.GameContainer = new goldman.GameContainer();
         console.log(gameContainer)
-		this.addChild(gameContainer);
+        this.addChild(gameContainer);
 
         // let sky = this.createBitmapByName("bg_jpg");
         // this.addChild(sky);
