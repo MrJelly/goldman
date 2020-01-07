@@ -41,11 +41,9 @@ var goldman;
         GameContainer.prototype.createGameScene = function () {
             this.gameManager = new goldman.GameManager();
             this.gameManager.addEventListener(goldman.GameManager.LEVEL_MANAGER_EVENT, this.onGameManagerEventHandler, this);
-            this.gameManager.addEventListener(goldman.GameManager.START_GO_EVENT, this.clickStartGo, this);
             this.addChild(this.gameManager);
             this.gameManager.createObjs();
             this.gameManager.setGoalText(this.levelArr[this.currLevel - 1].goal);
-            // this.gameManager.setLevelText(this.currLevel);
             this.objManager = new goldman.ObjManager();
             this.objManager.addEventListener(goldman.ObjManager.OBJ_MANAGER_EVENT, this.onObjManagerEventHandler, this);
             this.addChild(this.objManager);
@@ -56,7 +54,7 @@ var goldman;
             this.hookManager.x = GameContainer.thisW / 2;
             this.hookManager.y = 158;
             this.gameOver = new goldman.GameOver();
-            // this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStage, this); //点击勾取
+            this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this); //点击勾取
             this.addEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
             this.createGameTimeInterval();
         };
@@ -96,14 +94,13 @@ var goldman;
             this.removeChild(this.gameOver);
         };
         GameContainer.prototype.destoryGameScene = function () {
-            this.gameManager.removeEventListener(goldman.GameManager.START_GO_EVENT, this.clickStartGo, this);
             this.gameManager.destroy();
             this.removeChild(this.gameManager);
             this.objManager.destroy();
             this.removeChild(this.objManager);
             this.hookManager.destroy();
             this.removeChild(this.hookManager);
-            // this.stage.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStage, this);
+            this.stage.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
             this.removeEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
             this.levelTimer.removeEventListener(egret.TimerEvent.TIMER, this.gameTimerFunc, this);
             this.levelTimer.removeEventListener(egret.TimerEvent.TIMER_COMPLETE, this.gameTimerComFunc, this);

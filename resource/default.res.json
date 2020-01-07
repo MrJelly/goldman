@@ -1,7 +1,7 @@
 {
 	"groups": [
 		{
-			"keys": "Gold1_Back,Gold2,Gold2_Back,Gold3,Gold3_Back,hero_png,hook_png,Kulou_Back_png,LevelPanel_png,mouse_png,Mouse_Back_png,mouseDiamond_png,objsConfig_json,play_btn_png,back_btn_png,bg_png,bgall_png,diamond_png,Diamond_Back_png,Gold1,Level_json,msgboxbg_png,clearok_png,monster1_png,over_png",
+			"keys": "Gold1_Back,Gold2,Gold2_Back,Gold3,Gold3_Back,hero_png,hook_png,Kulou_Back_png,LevelPanel_png,mouse_png,Mouse_Back_png,mouseDiamond_png,play_btn_png,back_btn_png,bg_png,bgall_png,diamond_png,Diamond_Back_png,Gold1,msgboxbg_png,clearok_png,monster1_png,over_png,Level_json,objsConfig_json",
 			"name": "preload"
 		}
 	],
@@ -67,11 +67,6 @@
 			"name": "mouseDiamond_png"
 		},
 		{
-			"url": "assets/objsConfig.json",
-			"type": "json",
-			"name": "objsConfig_json"
-		},
-		{
 			"url": "assets/play_btn.png",
 			"type": "image",
 			"name": "play_btn_png"
@@ -107,11 +102,6 @@
 			"name": "Gold1"
 		},
 		{
-			"url": "assets/Level.json",
-			"type": "json",
-			"name": "Level_json"
-		},
-		{
 			"name": "msgboxbg_png",
 			"type": "image",
 			"url": "assets/msgboxbg.png"
@@ -130,6 +120,16 @@
 			"name": "over_png",
 			"type": "image",
 			"url": "assets/over.png"
+		},
+		{
+			"name": "Level_json",
+			"type": "json",
+			"url": "config/Level.json"
+		},
+		{
+			"name": "objsConfig_json",
+			"type": "json",
+			"url": "config/objsConfig.json"
 		}
 	]
 }

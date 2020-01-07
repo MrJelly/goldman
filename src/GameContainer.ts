@@ -44,12 +44,10 @@ module goldman {
         private createGameScene(): void {
             this.gameManager = new GameManager();
             this.gameManager.addEventListener(GameManager.LEVEL_MANAGER_EVENT, this.onGameManagerEventHandler, this);
-            this.gameManager.addEventListener(GameManager.START_GO_EVENT, this.clickStartGo, this)
 
             this.addChild(this.gameManager);
             this.gameManager.createObjs();
             this.gameManager.setGoalText(this.levelArr[this.currLevel - 1].goal);
-            // this.gameManager.setLevelText(this.currLevel);
             this.objManager = new ObjManager();
             this.objManager.addEventListener(ObjManager.OBJ_MANAGER_EVENT, this.onObjManagerEventHandler, this);
 
@@ -67,7 +65,7 @@ module goldman {
 
 
 
-            // this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStage, this); //点击勾取
+            this.stage.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this); //点击勾取
             this.addEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
 
             this.createGameTimeInterval();
@@ -115,7 +113,6 @@ module goldman {
         }
 
         private destoryGameScene(): void {
-            this.gameManager.removeEventListener(GameManager.START_GO_EVENT, this.clickStartGo, this);
             this.gameManager.destroy();
             this.removeChild(this.gameManager);
             this.objManager.destroy();
@@ -123,7 +120,7 @@ module goldman {
             this.hookManager.destroy();
             this.removeChild(this.hookManager);
 
-            // this.stage.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStage, this);
+            this.stage.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
             this.removeEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
             this.levelTimer.removeEventListener(egret.TimerEvent.TIMER, this.gameTimerFunc, this);
             this.levelTimer.removeEventListener(egret.TimerEvent.TIMER_COMPLETE, this.gameTimerComFunc, this);
