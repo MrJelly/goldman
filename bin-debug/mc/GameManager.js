@@ -23,9 +23,12 @@ var goldman;
         };
         GameManager.prototype.init = function () {
             console.log("GameSceneSkin");
-            this.skinName = "resource/skins/GameSceneSkin.exml";
+            this.skinName = "GameSceneSkin";
+            this.touchEnabled = true;
+            this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
         };
-        GameManager.prototype.createObjs = function () {
+        GameManager.prototype.clickStartGo = function (e) {
+            this.dispatchEventWith(GameManager.TRIGGER_START_GO, false);
         };
         GameManager.prototype.setScoreText = function (score) {
             this.scoreTextField.text = score.toString();
@@ -43,10 +46,9 @@ var goldman;
             this.scoreTextField = null;
             this.goalTextField = null;
             this.timeTextField = null;
+            this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
         };
-        // private levelPanelBmp: egret.Bitmap;
-        // private levelTextField: egret.TextField;
-        GameManager.LEVEL_MANAGER_EVENT = 'LEVEL_MANAGER_EVENT';
+        GameManager.TRIGGER_START_GO = 'TRIGGER_START_GO';
         return GameManager;
     }(eui.Component));
     goldman.GameManager = GameManager;

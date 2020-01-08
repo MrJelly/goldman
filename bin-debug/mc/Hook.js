@@ -46,7 +46,7 @@ var goldman;
             if (lineHeight === void 0) { lineHeight = 0; }
             this._hookBmp.y = lineHeight;
             this.line.graphics.clear();
-            this.line.graphics.lineStyle(3, 0x3c3841);
+            this.line.graphics.lineStyle(4, 0x3c3841);
             this.line.graphics.moveTo(0, 0);
             this.line.graphics.lineTo(0, lineHeight);
             this.line.graphics.endFill();

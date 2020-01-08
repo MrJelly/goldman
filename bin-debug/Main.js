@@ -74,22 +74,18 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 var Main = (function (_super) {
     __extends(Main, _super);
     function Main() {
-        var _this = _super.call(this) || this;
-        _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
-        return _this;
+        return _super !== null && _super.apply(this, arguments) || this;
     }
-    Main.prototype.onAddToStage = function (event) {
+    Main.prototype.createChildren = function () {
+        _super.prototype.createChildren.call(this);
         egret.lifecycle.addLifecycleListener(function (context) {
             // custom lifecycle plugin
-            context.onUpdate = function () {
-            };
         });
-        egret.lifecycle.onPause = function () {
-            egret.ticker.pause();
-        };
-        egret.lifecycle.onResume = function () {
-            egret.ticker.resume();
-        };
+        //inject the custom material parser
+        //注入自定义的素材解析器
+        var assetAdapter = new AssetAdapter();
+        egret.registerImplementation("eui.IAssetAdapter", assetAdapter);
+        egret.registerImplementation("eui.IThemeAdapter", new ThemeAdapter());
         this.runGame().catch(function (e) {
             console.log(e);
         });
@@ -239,6 +235,6 @@ var Main = (function (_super) {
         change();
     };
     return Main;
-}(egret.DisplayObjectContainer));
+}(eui.UILayer));
 __reflect(Main.prototype, "Main");
 //# sourceMappingURL=Main.js.map

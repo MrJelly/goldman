@@ -6,7 +6,7 @@ module goldman {
 		private BASE_ROTATION_MAX:number = 60;//钩子默认旋转角度
 		private LINE_HEIGHT_DEFAULT:number = 30;//绳子默认长度
 		private GO_V_DEFAULT:number = 8;//钩子默认出击速度
-		private BACK_V_DEFAULT:number = 13;//钩子默认缩回速度
+		private BACK_V_DEFAULT:number = 10;//钩子默认缩回速度
 
 		private direction:string;//当前方向
 		private lineHeight:number;//绳子当前长度
@@ -74,7 +74,6 @@ module goldman {
 		}
 
 		private onUpdateGo():void {
-			console.log("ddddddd")
 			var vHeight = this.goV;
 			if (this.isBack) {
 				vHeight = -this.backV;
@@ -94,12 +93,19 @@ module goldman {
 
 			//判断是否出界
 			if (!this.isBack) {
-				var hookGlobalPoint = this.hook.localToGlobal(this.hook.hookBmp.x, this.hook.hookBmp.y);
+				var hookGlobalPoint = this.getHookPoint();
 				if (hookGlobalPoint.x < 0 || hookGlobalPoint.x > GameContainer.thisW || hookGlobalPoint.y > GameContainer.thisH) {//各种边缘出界
 					this.isBack = true;
 					this.backV = this.BACK_V_DEFAULT;
 				}
 			}
+		}
+
+		/**
+		 * getHookPoint
+		 */
+		public getHookPoint():any {
+			return this.hook.localToGlobal(this.hook.hookBmp.x, this.hook.hookBmp.y);
 		}
 
 		public setHookBackV(backV:number):void {
@@ -122,7 +128,7 @@ module goldman {
 			this.catchObj = obj;
 			var typeStr:string = obj.type;
 			console.log("catchObj.type: " + typeStr);
-			this.hook.setBackHookType(typeStr);
+			this.hook.setBackHookType(typeStr);//设置钩子的样子
 		}
 
 		public destroy():void {

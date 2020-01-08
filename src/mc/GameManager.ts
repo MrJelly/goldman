@@ -5,10 +5,8 @@ module goldman {
 		private goalTextField: eui.Label;
 		private timeTextField: eui.Label;
 
-		// private levelPanelBmp: egret.Bitmap;
-		// private levelTextField: egret.TextField;
 
-		public static LEVEL_MANAGER_EVENT: string = 'LEVEL_MANAGER_EVENT';
+		public static TRIGGER_START_GO: string = 'TRIGGER_START_GO';
 
 		public constructor() {
 			super();
@@ -20,14 +18,15 @@ module goldman {
 			this.init();
 		}
 		private init() {
-            console.log("GameSceneSkin")
-            this.skinName = "resource/skins/GameSceneSkin.exml";
-        }
-
-		public createObjs(): void {
-			
+			console.log("GameSceneSkin")
+			this.skinName = "GameSceneSkin";
+			this.touchEnabled = true;
+			this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this)
 		}
 
+		private clickStartGo(e: egret.TouchEvent): void {
+			this.dispatchEventWith(GameManager.TRIGGER_START_GO, false)
+		}
 		public setScoreText(score: number): void {
 			this.scoreTextField.text = score.toString();
 		}
@@ -47,6 +46,7 @@ module goldman {
 			this.scoreTextField = null;
 			this.goalTextField = null;
 			this.timeTextField = null;
+			this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this)
 		}
 	}
 }

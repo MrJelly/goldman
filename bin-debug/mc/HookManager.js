@@ -17,7 +17,7 @@ var goldman;
             _this.BASE_ROTATION_MAX = 60; //钩子默认旋转角度
             _this.LINE_HEIGHT_DEFAULT = 30; //绳子默认长度
             _this.GO_V_DEFAULT = 8; //钩子默认出击速度
-            _this.BACK_V_DEFAULT = 13; //钩子默认缩回速度
+            _this.BACK_V_DEFAULT = 10; //钩子默认缩回速度
             _this.isGo = false; //钩子是否在抓取
             _this.isBack = false; //钩子是否在收回
             _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
@@ -66,7 +66,6 @@ var goldman;
             this.direction = "stop";
         };
         HookManager.prototype.onUpdateGo = function () {
-            console.log("ddddddd");
             var vHeight = this.goV;
             if (this.isBack) {
                 vHeight = -this.backV;
@@ -83,12 +82,18 @@ var goldman;
             }
             //判断是否出界
             if (!this.isBack) {
-                var hookGlobalPoint = this.hook.localToGlobal(this.hook.hookBmp.x, this.hook.hookBmp.y);
+                var hookGlobalPoint = this.getHookPoint();
                 if (hookGlobalPoint.x < 0 || hookGlobalPoint.x > goldman.GameContainer.thisW || hookGlobalPoint.y > goldman.GameContainer.thisH) {
                     this.isBack = true;
                     this.backV = this.BACK_V_DEFAULT;
                 }
             }
+        };
+        /**
+         * getHookPoint
+         */
+        HookManager.prototype.getHookPoint = function () {
+            return this.hook.localToGlobal(this.hook.hookBmp.x, this.hook.hookBmp.y);
         };
         HookManager.prototype.setHookBackV = function (backV) {
             this.isBack = true;
@@ -108,7 +113,7 @@ var goldman;
             this.catchObj = obj;
             var typeStr = obj.type;
             console.log("catchObj.type: " + typeStr);
-            this.hook.setBackHookType(typeStr);
+            this.hook.setBackHookType(typeStr); //设置钩子的样子
         };
         HookManager.prototype.destroy = function () {
             console.log("删除hook");
