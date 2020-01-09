@@ -10,36 +10,37 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var goldman;
 (function (goldman) {
-    var GameManager = (function (_super) {
-        __extends(GameManager, _super);
-        function GameManager() {
+    var GameScene = (function (_super) {
+        __extends(GameScene, _super);
+        function GameScene() {
             var _this = _super.call(this) || this;
             _this.once(egret.Event.ADDED_TO_STAGE, _this.AddToStage, _this);
             return _this;
         }
-        GameManager.prototype.AddToStage = function (e) {
+        GameScene.prototype.AddToStage = function (e) {
             console.log("AddToStage");
             this.init();
         };
-        GameManager.prototype.init = function () {
+        GameScene.prototype.init = function () {
             console.log("GameSceneSkin");
             this.skinName = "GameSceneSkin";
             this.touchEnabled = true;
             this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
+            goldman.SoundManager.getInstance().PlayBGM();
         };
-        GameManager.prototype.clickStartGo = function (e) {
-            this.dispatchEventWith(GameManager.TRIGGER_START_GO, false);
+        GameScene.prototype.clickStartGo = function (e) {
+            this.dispatchEventWith(GameScene.TRIGGER_START_GO, false);
         };
-        GameManager.prototype.setScoreText = function (score) {
+        GameScene.prototype.setScoreText = function (score) {
             this.scoreTextField.text = score.toString();
         };
-        GameManager.prototype.setGoalText = function (goalScore) {
+        GameScene.prototype.setGoalText = function (goalScore) {
             this.goalTextField.text = goalScore.toString();
         };
-        GameManager.prototype.setTimeText = function (time) {
+        GameScene.prototype.setTimeText = function (time) {
             this.timeTextField.text = time + "s";
         };
-        GameManager.prototype.destroy = function () {
+        GameScene.prototype.destroy = function () {
             this.removeChild(this.scoreTextField);
             this.removeChild(this.goalTextField);
             this.removeChild(this.timeTextField);
@@ -48,10 +49,10 @@ var goldman;
             this.timeTextField = null;
             this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
         };
-        GameManager.TRIGGER_START_GO = 'TRIGGER_START_GO';
-        return GameManager;
+        GameScene.TRIGGER_START_GO = 'TRIGGER_START_GO';
+        return GameScene;
     }(eui.Component));
-    goldman.GameManager = GameManager;
-    __reflect(GameManager.prototype, "goldman.GameManager");
+    goldman.GameScene = GameScene;
+    __reflect(GameScene.prototype, "goldman.GameScene");
 })(goldman || (goldman = {}));
-//# sourceMappingURL=GameManager.js.map
+//# sourceMappingURL=GameScene.js.map

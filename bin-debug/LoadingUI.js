@@ -40,6 +40,7 @@ var LoadingUI = (function (_super) {
     __extends(LoadingUI, _super);
     function LoadingUI() {
         var _this = _super.call(this) || this;
+        goldman.SoundManager.getInstance();
         _this.createView();
         return _this;
     }

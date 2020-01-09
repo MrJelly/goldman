@@ -71,6 +71,7 @@ module goldman {
 		public startGo():void {
 			this.isGo = true;
 			this.direction = "stop";
+			SoundManager.getInstance().PlayPull();
 		}
 
 		private onUpdateGo():void {
@@ -94,7 +95,7 @@ module goldman {
 			//判断是否出界
 			if (!this.isBack) {
 				var hookGlobalPoint = this.getHookPoint();
-				if (hookGlobalPoint.x < 0 || hookGlobalPoint.x > GameContainer.thisW || hookGlobalPoint.y > GameContainer.thisH) {//各种边缘出界
+				if (hookGlobalPoint.x < 0 || hookGlobalPoint.x > GameManager.getInstance().GameStage_width || hookGlobalPoint.y > GameManager.getInstance().GameStage_height) {//各种边缘出界
 					this.isBack = true;
 					this.backV = this.BACK_V_DEFAULT;
 				}
@@ -111,6 +112,8 @@ module goldman {
 		public setHookBackV(backV:number):void {
 			this.isBack = true;
 			this.backV = backV;
+			SoundManager.getInstance().StopPull();
+			SoundManager.getInstance().PlayDig();
 		}
 
 		public goComplete():void {
@@ -122,6 +125,8 @@ module goldman {
 			this.isBack = false;
 			this.startRotate();
 			this.catchObj = null;
+			SoundManager.getInstance().StopDig();
+			SoundManager.getInstance().StopPull();
 		}
 
 		public setCatchObj(obj:Obj):void {

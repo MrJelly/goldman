@@ -64,6 +64,7 @@ var goldman;
         HookManager.prototype.startGo = function () {
             this.isGo = true;
             this.direction = "stop";
+            goldman.SoundManager.getInstance().PlayPull();
         };
         HookManager.prototype.onUpdateGo = function () {
             var vHeight = this.goV;
@@ -83,7 +84,7 @@ var goldman;
             //判断是否出界
             if (!this.isBack) {
                 var hookGlobalPoint = this.getHookPoint();
-                if (hookGlobalPoint.x < 0 || hookGlobalPoint.x > goldman.GameContainer.thisW || hookGlobalPoint.y > goldman.GameContainer.thisH) {
+                if (hookGlobalPoint.x < 0 || hookGlobalPoint.x > goldman.GameManager.getInstance().GameStage_width || hookGlobalPoint.y > goldman.GameManager.getInstance().GameStage_height) {
                     this.isBack = true;
                     this.backV = this.BACK_V_DEFAULT;
                 }
@@ -98,6 +99,8 @@ var goldman;
         HookManager.prototype.setHookBackV = function (backV) {
             this.isBack = true;
             this.backV = backV;
+            goldman.SoundManager.getInstance().StopPull();
+            goldman.SoundManager.getInstance().PlayDig();
         };
         HookManager.prototype.goComplete = function () {
             this.dispatchEventWith(HookManager.HOOK_MANAGER_EVENT, false, { type: HookManager.GO_COMPLETE_EVENT, catchObj: this.catchObj });
@@ -108,6 +111,8 @@ var goldman;
             this.isBack = false;
             this.startRotate();
             this.catchObj = null;
+            goldman.SoundManager.getInstance().StopDig();
+            goldman.SoundManager.getInstance().StopPull();
         };
         HookManager.prototype.setCatchObj = function (obj) {
             this.catchObj = obj;
