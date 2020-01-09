@@ -26,7 +26,7 @@ var goldman;
         SoundManager.prototype.PlayBGM = function () {
             if (this.IsMusic) {
                 this._bgm_channel = this._bgm.play(0, 0);
-                this._bgm_channel.volume = 0.1;
+                // this._bgm_channel.volume=0.1;
             }
         };
         SoundManager.prototype.StopBGM = function () {

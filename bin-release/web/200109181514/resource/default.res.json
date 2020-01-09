@@ -1,16 +1,11 @@
 {
 	"groups": [
 		{
-			"keys": "description_json,Gold1_Back,Gold2,Gold2_Back,Gold3,Gold3_Back,hero_png,hook_png,Kulou_Back_png,LevelPanel_png,mouse_png,Mouse_Back_png,mouseDiamond_png,objsConfig_json,play_btn_png,back_btn_png,bg_png,bgall_png,diamond_png,Diamond_Back_png,Gold1,Level_json,msgboxbg_png,clearok_png,monster1_png,over_png",
+			"keys": "Gold1_Back,Gold2,Gold2_Back,Gold3,Gold3_Back,hero_png,hook_png,Kulou_Back_png,LevelPanel_png,mouse_png,Mouse_Back_png,mouseDiamond_png,play_btn_png,back_btn_png,bg_png,bgall_png,diamond_png,Diamond_Back_png,Gold1,msgboxbg_png,clearok_png,monster1_png,over_png,Level_json,objsConfig_json,coin_png,bgm_mp3,button_mp3,dig_mp3,last-10s-sound_mp3,pull_mp3,score_mp3",
 			"name": "preload"
 		}
 	],
 	"resources": [
-		{
-			"url": "config/description.json",
-			"type": "json",
-			"name": "description_json"
-		},
 		{
 			"url": "assets/Gold1_Back.png",
 			"type": "image",
@@ -72,11 +67,6 @@
 			"name": "mouseDiamond_png"
 		},
 		{
-			"url": "assets/objsConfig.json",
-			"type": "json",
-			"name": "objsConfig_json"
-		},
-		{
 			"url": "assets/play_btn.png",
 			"type": "image",
 			"name": "play_btn_png"
@@ -112,11 +102,6 @@
 			"name": "Gold1"
 		},
 		{
-			"url": "assets/Level.json",
-			"type": "json",
-			"name": "Level_json"
-		},
-		{
 			"name": "msgboxbg_png",
 			"type": "image",
 			"url": "assets/msgboxbg.png"
@@ -135,6 +120,51 @@
 			"name": "over_png",
 			"type": "image",
 			"url": "assets/over.png"
+		},
+		{
+			"name": "Level_json",
+			"type": "json",
+			"url": "config/Level.json"
+		},
+		{
+			"name": "objsConfig_json",
+			"type": "json",
+			"url": "config/objsConfig.json"
+		},
+		{
+			"name": "coin_png",
+			"type": "image",
+			"url": "assets/coin.png"
+		},
+		{
+			"name": "bgm_mp3",
+			"type": "sound",
+			"url": "sound/bgm.mp3"
+		},
+		{
+			"name": "button_mp3",
+			"type": "sound",
+			"url": "sound/button.mp3"
+		},
+		{
+			"name": "dig_mp3",
+			"type": "sound",
+			"url": "sound/dig.mp3"
+		},
+		{
+			"name": "last-10s-sound_mp3",
+			"type": "sound",
+			"url": "sound/last-10s-sound.mp3"
+		},
+		{
+			"name": "pull_mp3",
+			"type": "sound",
+			"url": "sound/pull.mp3"
+		},
+		{
+			"name": "score_mp3",
+			"type": "sound",
+			"url": "sound/score.mp3"
 		}
 	]
 }
