@@ -1,0 +1,8 @@
+[{"id":1,"image":"gold3_png","score":10,"max_num":3,"left":1,"pos":0,"movetype":0,"speed":8,"posX":605,"posY":747},
+{"id":2,"image":"gold2_png","score":10,"max_num":1,"left":1,"pos":0,"movetype":0,"speed":6,"posX":147,"posY":572},
+{"id":3,"image":"gold1_png","max_num":2,"score":10,"left":0,"pos":1,"movetype":0,"speed":6,"posX":350,"posY":462},
+{"id":4,"image":"gold1_png","max_num":2,"left":0,"score":20,"pos":2,"movetype":1,"speed":4,"posX":611,"posY":390},
+{"id":5,"image":"gold1_png","max_num":2,"left":0,"score":20,"pos":2,"movetype":1,"speed":4,"posX":86,"posY":369},
+{"id":6,"image":"gold2_png","max_num":2,"left":0,"score":20,"pos":2,"movetype":1,"speed":4,"posX":417,"posY":916},
+{"id":7,"image":"gold2_png","max_num":2,"left":0,"score":20,"pos":2,"movetype":1,"speed":4,"posX":147,"posY":832},
+{"id":8,"image":"gold1_png","score":30,"max_num":1,"left":1,"pos":0,"movetype":0,"speed":4,"posX":450,"posY":300}]

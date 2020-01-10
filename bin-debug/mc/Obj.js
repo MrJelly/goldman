@@ -10,57 +10,64 @@ r.prototype = e.prototype, t.prototype = new r();
 };
 var goldman;
 (function (goldman) {
+    var Seeds = (function () {
+        function Seeds() {
+        }
+        return Seeds;
+    }());
+    __reflect(Seeds.prototype, "Seeds");
     var Obj = (function (_super) {
         __extends(Obj, _super);
-        function Obj(tp, money, backV) {
+        function Obj(op) {
             var _this = _super.call(this) || this;
-            _this.name = (Math.floor(Math.random() * 9999999999)).toString();
-            _this._type = tp;
-            _this._money = Number(money);
-            _this._backV = Number(backV);
+            _this._seeds = op;
             _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
             return _this;
         }
         Obj.prototype.onAddToStage = function (e) {
             this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-            this.objBmp = goldman.createBitmapByName(this._type);
+            this.objBmp = goldman.createBitmapByName(this._seeds.image);
             this.addChild(this.objBmp);
+            this.x = this._seeds.posX;
+            this.y = this._seeds.posY;
             var oMoneyTextField = new egret.TextField();
             this.addChild(oMoneyTextField);
             oMoneyTextField.textAlign = egret.HorizontalAlign.LEFT;
             oMoneyTextField.textColor = 0x000000;
             oMoneyTextField.width = 22;
             oMoneyTextField.size = 18;
-            oMoneyTextField.text = this._money.toString();
+            oMoneyTextField.text = this._seeds.score.toString();
         };
-        Obj.prototype.overObject = function () {
+        Obj.prototype.removeFromParent = function () {
+            this.parent.removeChild(this);
         };
-        Object.defineProperty(Obj.prototype, "money", {
+        Object.defineProperty(Obj.prototype, "score", {
             get: function () {
-                return this._money;
+                return this._seeds.score;
             },
             set: function (m) {
-                this._money = m;
+                this._seeds.score = m;
             },
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(Obj.prototype, "backV", {
+        Object.defineProperty(Obj.prototype, "speed", {
             get: function () {
-                return this._backV;
+                return this._seeds.speed;
             },
-            set: function (m) {
-                this._backV = m;
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(Obj.prototype, "image", {
+            get: function () {
+                return this._seeds.image;
             },
             enumerable: true,
             configurable: true
         });
         Object.defineProperty(Obj.prototype, "type", {
             get: function () {
-                return this._type;
-            },
-            set: function (t) {
-                this._type = t;
+                return "";
             },
             enumerable: true,
             configurable: true

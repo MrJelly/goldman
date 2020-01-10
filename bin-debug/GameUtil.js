@@ -17,10 +17,6 @@ var goldman;
     goldman.GameUtil = GameUtil;
     __reflect(GameUtil.prototype, "goldman.GameUtil");
     goldman.baseUrl = "http://";
-    goldman.sounds = {
-        pull: "pull_mp3",
-        bg: "level-bg_mp3"
-    };
     /**
      * 根据名称获取位图资源
      */

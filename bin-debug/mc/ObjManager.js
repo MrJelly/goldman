@@ -15,24 +15,12 @@ var goldman;
         function ObjManager() {
             var _this = _super.call(this) || this;
             _this._objsArr = [];
-            _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
             return _this;
         }
-        ObjManager.prototype.onAddToStage = function (e) {
-            this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
-            this.objsConfig = RES.getRes("objsConfig_json");
-            console.log("=========>", this.objsConfig);
-        };
         ObjManager.prototype.createObjs = function (objDatas) {
             for (var i = 0; i < objDatas.length; i++) {
                 var objData = objDatas[i];
-                var ty = objData.name;
-                var money = this.objsConfig[ty].money;
-                var backV = this.objsConfig[ty].backV;
-                var oClass = egret.getDefinitionByName("goldman." + ty);
-                var obj = new oClass(money, backV);
-                obj.x = objData.x;
-                obj.y = objData.y;
+                var obj = new goldman.Obj(objData);
                 this._objsArr.push(obj);
                 this.addChild(obj);
             }

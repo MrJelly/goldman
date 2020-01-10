@@ -13,9 +13,9 @@ namespace goldman {
     public GameStage: egret.Stage;
     public GameStage_width: number;
     public GameStage_height: number;
-    private levelArr: any = [];
-    private currLevel: number = 1;
-    private money: number = 0;
+    private score: number = 0;
+    private goal:number = 100;
+    private missionArr:any =[];
 
     private levelTimer: egret.Timer;
     private LEVEL_TIME: number = 60;
@@ -27,16 +27,16 @@ namespace goldman {
     private isOver: boolean = false;
 
     public initGame(): void {
-      this.levelArr = RES.getRes("Level_json");
+      this.missionArr = RES.getRes("mission_json");
       this.gameScene = new GameScene();
 
       this.GameStage.addChild(this.gameScene);
-      this.gameScene.setGoalText(this.levelArr[this.currLevel - 1].goal);
-      this.gameScene.addEventListener(GameScene.TRIGGER_START_GO, this.onStartGo, this); //点击勾取
+      this.gameScene.setGoalText(this.goal);
+      // this.gameScene.addEventListener(GameScene.TRIGGER_START_GO, this.onStartGo, this); //点击勾取
       this.objManager = new ObjManager();
 
       this.GameStage.addChild(this.objManager);
-      this.objManager.createObjs(this.levelArr[this.currLevel - 1].objsArr);
+      this.objManager.createObjs(this.missionArr);
 
       this.hookManager = new HookManager();
       this.hookManager.addEventListener(HookManager.HOOK_MANAGER_EVENT, this.onHookManagerEventHandler, this);
@@ -82,7 +82,7 @@ namespace goldman {
         //执行事件
         console.log("alert msgbox!!!!!")
         that.GameStage.addChild(that.gameOver);
-        that.gameOver.setScoreText(that.money);
+        that.gameOver.setScoreText(that.score);
         that.gameOver.addEventListener(GameOver.CLOSE_GAMEOVER_EVENT, that.onDestroyGameOver, that)
         clearTimeout(timeHandle);
       }, that, 500);
@@ -101,7 +101,7 @@ namespace goldman {
       this.hookManager.destroy();
       this.GameStage.removeChild(this.gameOver);
       this.gameOver.destroy();
-      this.gameScene.removeEventListener(GameScene.TRIGGER_START_GO, this.onStartGo, this);
+      // this.gameScene.removeEventListener(GameScene.TRIGGER_START_GO, this.onStartGo, this);
       this.GameStage.removeEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
       this.levelTimer.removeEventListener(egret.TimerEvent.TIMER, this.gameTimerFunc, this);
       this.levelTimer.removeEventListener(egret.TimerEvent.TIMER_COMPLETE, this.gameTimerComFunc, this);
@@ -120,9 +120,10 @@ namespace goldman {
           if (this.isOver) { return }
           var catchObj: Obj = data.catchObj;
           if (catchObj) {
-            console.log("obj.money " + catchObj.money);
-            this.money += catchObj.money;
-            this.gameScene.setScoreText(this.money);
+            console.log("obj.score " + catchObj.score);
+            this.score += catchObj.score;
+            this.gameScene.setScoreText(this.score);
+            GoldEffectUtils.showTips(catchObj.score.toString(),false)
             for (let i = 0; i < 3; i++) {
               GoldEffectUtils.createImg();
             }
@@ -150,20 +151,17 @@ namespace goldman {
           if (obj.type == "TNT") {
             me.hookManager.setHookBackV(0);
             me.objManager.removeObjsAtAreaByHitObj(obj);
-            obj.overObject();
             setTimeout(function () {
-              me.hookManager.setHookBackV(obj.backV);
+              me.hookManager.setHookBackV(obj.speed);
               me.hookManager.setCatchObj(obj);
               obj.destory();
             }, 300);
           } else {
-            me.hookManager.setHookBackV(obj.backV);
-            let point = me.hookManager.getHookPoint()
-            egret.Tween.get(obj).to({ x: point.x, y: point.y }, 100, egret.Ease.sineIn).call(function () {
+              me.hookManager.setHookBackV(obj.speed);
               me.hookManager.setCatchObj(obj);
               me.objManager.removeObj(obj);
               obj.destory();
-            });
+              // let point = me.hookManager.getHookPoint()
           }
           break;
         }

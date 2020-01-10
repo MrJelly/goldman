@@ -25,9 +25,9 @@
 	_proto._Image1_i = function () {
 		var t = new eui.Image();
 		t.anchorOffsetX = 0;
-		t.horizontalCenter = 0.5;
+		t.horizontalCenter = 0;
 		t.source = "resource/assets/over.png";
-		t.verticalCenter = -1;
+		t.verticalCenter = 0;
 		t.width = 535.34;
 		return t;
 	};

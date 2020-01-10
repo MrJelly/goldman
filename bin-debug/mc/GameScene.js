@@ -12,6 +12,7 @@ var goldman;
 (function (goldman) {
     var GameScene = (function (_super) {
         __extends(GameScene, _super);
+        // public static TRIGGER_START_GO: string = 'TRIGGER_START_GO';
         function GameScene() {
             var _this = _super.call(this) || this;
             _this.once(egret.Event.ADDED_TO_STAGE, _this.AddToStage, _this);
@@ -29,7 +30,7 @@ var goldman;
             goldman.SoundManager.getInstance().PlayBGM();
         };
         GameScene.prototype.clickStartGo = function (e) {
-            this.dispatchEventWith(GameScene.TRIGGER_START_GO, false);
+            goldman.GameManager.getInstance().onStartGo();
         };
         GameScene.prototype.setScoreText = function (score) {
             this.scoreTextField.text = score.toString();
@@ -49,7 +50,6 @@ var goldman;
             this.timeTextField = null;
             this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
         };
-        GameScene.TRIGGER_START_GO = 'TRIGGER_START_GO';
         return GameScene;
     }(eui.Component));
     goldman.GameScene = GameScene;

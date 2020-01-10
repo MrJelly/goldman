@@ -36,26 +36,73 @@ var __extends = this && this.__extends || function __extends(t, e) {
 for (var i in e) e.hasOwnProperty(i) && (t[i] = e[i]);
 r.prototype = e.prototype, t.prototype = new r();
 };
+// class LoadingUI extends egret.Sprite implements RES.PromiseTaskReporter {
+//     public constructor() {
+//         super();
+//         goldman.SoundManager.getInstance();
+//         this.createView();
+//     }
+//     private textField: egret.TextField;
+//     private createView(): void {
+//         this.textField = new egret.TextField();
+//         this.addChild(this.textField);
+//         this.textField.y = goldman.GameManager.getInstance().GameStage_height/2-50;
+//         this.textField.x = goldman.GameManager.getInstance().GameStage_width/2-240;
+//         this.textField.width = 480;
+//         this.textField.height = 100;
+//         this.textField.textAlign = "center";
+//         this.textField.textColor = 0x000000;
+//     }
+//     public onProgress(current: number, total: number): void {
+//         this.textField.text = `Loading...${current}/${total}`;
+//     }
+// }
 var LoadingUI = (function (_super) {
     __extends(LoadingUI, _super);
     function LoadingUI() {
         var _this = _super.call(this) || this;
+        _this.w = 0;
+        _this.h = 0;
         goldman.SoundManager.getInstance();
         _this.createView();
         return _this;
     }
     LoadingUI.prototype.createView = function () {
+        this.w = egret.MainContext.instance.stage.stageWidth;
+        this.h = egret.MainContext.instance.stage.stageHeight;
+        console.log("====>>>", this.w, this.h);
+        this.pgBg = new egret.Bitmap;
+        console.log("=====>>>", RES.getRes);
+        this.pgBg.texture = RES.getRes("PreLoadingBarBg_png");
+        this.pgBg.x = this.w / 2 - this.pgBg.width / 2;
+        this.pgBg.y = this.h / 2 - this.pgBg.height / 2;
+        this.addChild(this.pgBg);
+        this.pgBar = new egret.Bitmap;
+        this.pgBar.texture = RES.getRes("PreLoadingBar_png");
+        this.pgBar.x = this.w / 2 - this.pgBar.width / 2;
+        this.pgBar.y = this.pgBg.y + 20;
+        this.addChild(this.pgBar);
         this.textField = new egret.TextField();
+        this.textField.size = 24;
+        this.textField.textColor = 0xFFFFFF;
+        this.textField.bold = true;
+        this.textField.stroke = 1;
+        this.textField.strokeColor = 0x000000;
         this.addChild(this.textField);
-        this.textField.y = 300;
-        this.textField.width = 480;
-        this.textField.height = 100;
+        this.textField.width = 100;
+        this.textField.x = this.w / 2 - this.textField.width / 2;
+        this.textField.y = this.pgBg.y + 20;
         this.textField.textAlign = "center";
+        this.textField.text = "0%";
+        console.log("======>>", this.pgBg.width);
+        this.pgBar.width = 0;
     };
     LoadingUI.prototype.onProgress = function (current, total) {
-        this.textField.text = "Loading..." + current + "/" + total;
+        var rate = Math.round((current / total) * 100);
+        this.textField.text = rate + "%";
+        this.pgBar.width = this.pgBg.width * (current / total);
     };
     return LoadingUI;
-}(egret.Sprite));
+}(eui.UILayer));
 __reflect(LoadingUI.prototype, "LoadingUI", ["RES.PromiseTaskReporter"]);
 //# sourceMappingURL=LoadingUI.js.map

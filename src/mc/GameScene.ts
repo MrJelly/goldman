@@ -7,7 +7,7 @@ module goldman {
         private bgMusic: egret.Sound;
 
 
-        public static TRIGGER_START_GO: string = 'TRIGGER_START_GO';
+        // public static TRIGGER_START_GO: string = 'TRIGGER_START_GO';
 
         public constructor() {
             super();
@@ -27,7 +27,7 @@ module goldman {
         }
 
         private clickStartGo(e: egret.TouchEvent): void {
-            this.dispatchEventWith(GameScene.TRIGGER_START_GO, false)
+            GameManager.getInstance().onStartGo()
         }
         public setScoreText(score: number): void {
             this.scoreTextField.text = score.toString();

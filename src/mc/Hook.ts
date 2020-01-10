@@ -2,16 +2,16 @@
 module goldman {
 	export class Hook extends egret.Sprite {
 
-		private line:egret.Shape;
-		private _hookBmp:egret.Bitmap;
-		private _backHookBmp:egret.Bitmap;
+		private line: egret.Shape;
+		private _hookBmp: egret.Bitmap;
+		private _backHookBmp: egret.Bitmap;
 
 		public constructor() {
 			super();
 			this.addEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
 		}
 
-		private onAddToStage(e:egret.Event):void {
+		private onAddToStage(e: egret.Event): void {
 			this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
 
 			this.line = new egret.Shape();
@@ -20,9 +20,9 @@ module goldman {
 			this.addChild(this._hookBmp);
 		}
 
-		public setBackHookType(typeStr:string = ""):void {
+		public setBackHookType(typeStr: string = ""): void {
 			if (typeStr) {
-				this._backHookBmp = goldman.createBitmapByName(typeStr + "_Back");
+				this._backHookBmp = goldman.createBitmapByName(typeStr + "_back");
 				this.addChild(this._backHookBmp);
 				this._backHookBmp.x = this._hookBmp.x;
 				this._backHookBmp.y = this._hookBmp.y;
@@ -36,7 +36,7 @@ module goldman {
 			}
 		}
 
-		public redrawHook(lineHeight:number = 0):void {
+		public redrawHook(lineHeight: number = 0): void {
 			this._hookBmp.y = lineHeight;
 			this.line.graphics.clear();
 			this.line.graphics.lineStyle(3, 0x3c3841);
@@ -50,17 +50,17 @@ module goldman {
 				this.line.graphics.endFill();
 			}
 			this._hookBmp.x = -this._hookBmp.width / 2;
-			if(this._backHookBmp) {
+			if (this._backHookBmp) {
 				this._backHookBmp.y = lineHeight;
 				this._backHookBmp.x = -this._backHookBmp.width / 2;
 			}
 		}
 
-		get hookBmp():egret.Bitmap {
+		get hookBmp(): egret.Bitmap {
 			return this._hookBmp;
 		}
 
-		public destroy():void {
+		public destroy(): void {
 			this.removeChild(this.line);
 			this.line = null;
 			this.removeChild(this._hookBmp);

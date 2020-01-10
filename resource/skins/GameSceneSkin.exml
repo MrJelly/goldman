@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <e:Skin class="GameSceneSkin" width="750" height="292.2" xmlns:e="http://ns.egret.com/eui">
-	<e:Image width="750" height="1200" x="0" y="0" source="resource/assets/bgall.png"/>
+	<e:Image width="750" height="1200" x="0" y="0" source="bgall_png"/>
 	<e:Image width="168" height="151" x="330" y="34" source="hero_png"/>
 	<e:Label id="goalTextField" text="100" size="30" textColor="0x2C2020" width="60" textAlign="center" height="38" x="168" y="107.418" verticalAlign="middle"/>
 	<e:Label text="0" x="194" y="34" size="30" textColor="0x2C2020" id="scoreTextField" width="60" textAlign="center" height="38" border="false" verticalAlign="middle"/>

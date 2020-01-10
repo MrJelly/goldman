@@ -28,7 +28,7 @@ var goldman;
         Hook.prototype.setBackHookType = function (typeStr) {
             if (typeStr === void 0) { typeStr = ""; }
             if (typeStr) {
-                this._backHookBmp = goldman.createBitmapByName(typeStr + "_Back");
+                this._backHookBmp = goldman.createBitmapByName(typeStr + "_back");
                 this.addChild(this._backHookBmp);
                 this._backHookBmp.x = this._hookBmp.x;
                 this._backHookBmp.y = this._hookBmp.y;

@@ -3,6 +3,10 @@
 		{
 			"keys": "Gold1_Back,Gold2,Gold2_Back,Gold3,Gold3_Back,hero_png,hook_png,Kulou_Back_png,LevelPanel_png,mouse_png,Mouse_Back_png,mouseDiamond_png,play_btn_png,back_btn_png,bg_png,bgall_png,diamond_png,Diamond_Back_png,Gold1,msgboxbg_png,clearok_png,monster1_png,over_png,Level_json,objsConfig_json,coin_png,bgm_mp3,button_mp3,dig_mp3,last-10s-sound_mp3,pull_mp3,score_mp3",
 			"name": "preload"
+		},
+		{
+			"keys": "PreLoadingBar_png,PreLoadingBarBg_png",
+			"name": "loading"
 		}
 	],
 	"resources": [
@@ -102,69 +106,79 @@
 			"name": "Gold1"
 		},
 		{
-			"name": "msgboxbg_png",
+			"url": "assets/msgboxbg.png",
 			"type": "image",
-			"url": "assets/msgboxbg.png"
+			"name": "msgboxbg_png"
 		},
 		{
-			"name": "clearok_png",
+			"url": "assets/clearok.png",
 			"type": "image",
-			"url": "assets/clearok.png"
+			"name": "clearok_png"
 		},
 		{
-			"name": "monster1_png",
+			"url": "assets/monster1.png",
 			"type": "image",
-			"url": "assets/monster1.png"
+			"name": "monster1_png"
 		},
 		{
-			"name": "over_png",
+			"url": "assets/over.png",
 			"type": "image",
-			"url": "assets/over.png"
+			"name": "over_png"
 		},
 		{
-			"name": "Level_json",
+			"url": "config/Level.json",
 			"type": "json",
-			"url": "config/Level.json"
+			"name": "Level_json"
 		},
 		{
-			"name": "objsConfig_json",
+			"url": "config/objsConfig.json",
 			"type": "json",
-			"url": "config/objsConfig.json"
+			"name": "objsConfig_json"
 		},
 		{
-			"name": "coin_png",
+			"url": "assets/coin.png",
 			"type": "image",
-			"url": "assets/coin.png"
+			"name": "coin_png"
 		},
 		{
-			"name": "bgm_mp3",
+			"url": "sound/bgm.mp3",
 			"type": "sound",
-			"url": "sound/bgm.mp3"
+			"name": "bgm_mp3"
 		},
 		{
-			"name": "button_mp3",
+			"url": "sound/button.mp3",
 			"type": "sound",
-			"url": "sound/button.mp3"
+			"name": "button_mp3"
 		},
 		{
-			"name": "dig_mp3",
+			"url": "sound/dig.mp3",
 			"type": "sound",
-			"url": "sound/dig.mp3"
+			"name": "dig_mp3"
 		},
 		{
-			"name": "last-10s-sound_mp3",
+			"url": "sound/last-10s-sound.mp3",
 			"type": "sound",
-			"url": "sound/last-10s-sound.mp3"
+			"name": "last-10s-sound_mp3"
 		},
 		{
-			"name": "pull_mp3",
+			"url": "sound/pull.mp3",
 			"type": "sound",
-			"url": "sound/pull.mp3"
+			"name": "pull_mp3"
 		},
 		{
-			"name": "score_mp3",
+			"url": "sound/score.mp3",
 			"type": "sound",
-			"url": "sound/score.mp3"
+			"name": "score_mp3"
+		},
+		{
+			"url": "assets/PreLoadingBarBg.png",
+			"type": "image",
+			"name": "PreLoadingBarBg_png"
+		},
+		{
+			"url": "assets/PreLoadingBar.png",
+			"type": "image",
+			"name": "PreLoadingBar_png"
 		}
 	]
 }

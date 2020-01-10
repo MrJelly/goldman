@@ -97,10 +97,20 @@ var goldman;
             return this.hook.localToGlobal(this.hook.hookBmp.x, this.hook.hookBmp.y);
         };
         HookManager.prototype.setHookBackV = function (backV) {
-            this.isBack = true;
-            this.backV = backV;
+            console.log("backV===", backV);
+            var that = this;
+            that.isBack = true;
             goldman.SoundManager.getInstance().StopPull();
             goldman.SoundManager.getInstance().PlayDig();
+            that.backV = 0;
+            if (backV > 0) {
+                var tick_1 = setInterval(function () {
+                    that.backV = that.backV + 1;
+                    if (that.backV >= backV) {
+                        clearInterval(tick_1);
+                    }
+                }, 40);
+            }
         };
         HookManager.prototype.goComplete = function () {
             this.dispatchEventWith(HookManager.HOOK_MANAGER_EVENT, false, { type: HookManager.GO_COMPLETE_EVENT, catchObj: this.catchObj });
@@ -116,7 +126,7 @@ var goldman;
         };
         HookManager.prototype.setCatchObj = function (obj) {
             this.catchObj = obj;
-            var typeStr = obj.type;
+            var typeStr = obj.image;
             console.log("catchObj.type: " + typeStr);
             this.hook.setBackHookType(typeStr); //设置钩子的样子
         };
