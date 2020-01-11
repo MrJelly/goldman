@@ -24,9 +24,9 @@ var goldman;
             return SoundManager._instance;
         };
         SoundManager.prototype.PlayBGM = function () {
-            if (this.IsMusic) {
+            if (this.IsSound) {
                 this._bgm_channel = this._bgm.play(0, 0);
-                // this._bgm_channel.volume=0.1;
+                this._bgm_channel.volume = 0.1;
             }
         };
         SoundManager.prototype.StopBGM = function () {
@@ -69,41 +69,17 @@ var goldman;
                 this._lastsound.play(0, 1);
             }
         };
-        Object.defineProperty(SoundManager.prototype, "IsMusic", {
-            get: function () {
-                var b = egret.localStorage.getItem("ismusic");
-                if (b == null || b == "") {
-                    return true;
-                }
-                else {
-                    return b == "1";
-                }
-            },
-            //音乐是否播放，保存设置
-            set: function (value) {
-                if (!value) {
-                    egret.localStorage.setItem("ismusic", "0");
-                    this.StopBGM();
-                }
-                else {
-                    egret.localStorage.setItem("ismusic", "1");
-                    this.PlayBGM();
-                }
-            },
-            enumerable: true,
-            configurable: true
-        });
         Object.defineProperty(SoundManager.prototype, "IsSound", {
             get: function () {
                 var b = egret.localStorage.getItem("isSound");
                 if (b == null || b == "") {
-                    return true;
+                    return false;
                 }
                 else {
                     return b == "1";
                 }
             },
-            //声效是否播放，保存设置
+            //声音是否播放，保存设置
             set: function (value) {
                 if (value) {
                     egret.localStorage.setItem("isSound", "1");

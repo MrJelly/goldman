@@ -12,43 +12,62 @@ var goldman;
 (function (goldman) {
     var GameScene = (function (_super) {
         __extends(GameScene, _super);
-        // public static TRIGGER_START_GO: string = 'TRIGGER_START_GO';
         function GameScene() {
             var _this = _super.call(this) || this;
             _this.once(egret.Event.ADDED_TO_STAGE, _this.AddToStage, _this);
             return _this;
         }
         GameScene.prototype.AddToStage = function (e) {
-            console.log("AddToStage");
             this.init();
         };
         GameScene.prototype.init = function () {
-            console.log("GameSceneSkin");
             this.skinName = "GameSceneSkin";
             this.touchEnabled = true;
-            this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
-            goldman.SoundManager.getInstance().PlayBGM();
+            this.gameArea.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
+            if (goldman.SoundManager.getInstance().IsSound) {
+                this.checkbox.selected = true;
+                goldman.SoundManager.getInstance().PlayBGM();
+            }
+            else {
+                this.checkbox.selected = false;
+            }
+            this.checkbox.addEventListener(egret.Event.CHANGE, this.changeSound, this);
+        };
+        GameScene.prototype.changeSound = function (e) {
+            if (this.checkbox.selected) {
+                goldman.SoundManager.getInstance().IsSound = true;
+                goldman.SoundManager.getInstance().PlayBGM();
+            }
+            else {
+                goldman.SoundManager.getInstance().IsSound = false;
+                goldman.SoundManager.getInstance().StopBGM();
+            }
         };
         GameScene.prototype.clickStartGo = function (e) {
             goldman.GameManager.getInstance().onStartGo();
         };
-        GameScene.prototype.setScoreText = function (score) {
-            this.scoreTextField.text = score.toString();
+        GameScene.prototype.setYinScoreText = function (score) {
+            this.yinTextField.text = score.toString();
         };
-        GameScene.prototype.setGoalText = function (goalScore) {
-            this.goalTextField.text = goalScore.toString();
+        GameScene.prototype.setJinScoreText = function (score) {
+            this.jinTextField.text = score.toString();
         };
         GameScene.prototype.setTimeText = function (time) {
-            this.timeTextField.text = time + "s";
+            this.timeTextField.text = time.toString();
         };
         GameScene.prototype.destroy = function () {
-            this.removeChild(this.scoreTextField);
-            this.removeChild(this.goalTextField);
+            this.checkbox.removeEventListener(egret.Event.CHANGE, this.changeSound, this);
+            this.gameArea.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
+            this.removeChild(this.jinTextField);
+            this.removeChild(this.yinTextField);
             this.removeChild(this.timeTextField);
-            this.scoreTextField = null;
-            this.goalTextField = null;
+            this.removeChild(this.checkbox);
+            this.removeChild(this.gameArea);
+            this.jinTextField = null;
+            this.yinTextField = null;
             this.timeTextField = null;
-            this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
+            this.checkbox = null;
+            this.gameArea = null;
         };
         return GameScene;
     }(eui.Component));

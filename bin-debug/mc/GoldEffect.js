@@ -7,11 +7,20 @@ var goldman;
         function GoldEffectUtils() {
         }
         //dir是金币飞到的玩家位置
-        GoldEffectUtils.createImg = function () {
-            var goldImg = goldman.createBitmapByName("coin_png");
+        GoldEffectUtils.createSeeds = function (type) {
+            var goldImg;
+            var head;
+            if (type == 0) {
+                goldImg = goldman.createBitmapByName("yin_animation_png");
+                head = { x: 405, y: 50 };
+            }
+            else if (type == 1) {
+                goldImg = goldman.createBitmapByName("jin_animation_png");
+                head = { x: 160, y: 50 };
+            }
             goldman.GameManager.getInstance().GameStage.addChild(goldImg);
             var goldX = goldman.GameManager.getInstance().GameStage_width / 2 - goldImg.width / 2;
-            var goldY = 250;
+            var goldY = 330;
             var tweenTime = 600;
             var randomNum = Math.round((Math.random() * 40 + 1)); //随机增减xy值（使得金币看起来是散乱的）
             var randomTime = Math.floor((100 - 200 + 1) * Math.random() + 100);
@@ -44,9 +53,8 @@ var goldman;
                 egret.Tween.get(goldImg).to({ alpha: 0 }, 500).call(onComplete2, this); //隐藏金币
             };
             goldImg.visible = true;
-            var head = { x: 210, y: 40 };
             egret.Tween.get(goldImg).wait(randomTime)
-                .to({ y: 300, alpha: 1 }, 300, egret.Ease.sineIn)
+                .to({ y: 420, alpha: 1 }, 300, egret.Ease.sineIn)
                 .wait(100)
                 .to({ x: head.x, y: head.y, alpha: 1 }, tweenTime, egret.Ease.sineOut)
                 .call(onComplete1, this);

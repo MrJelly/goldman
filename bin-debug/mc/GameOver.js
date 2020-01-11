@@ -21,23 +21,22 @@ var goldman;
             this.init();
         };
         GameOver.prototype.init = function () {
-            console.log("444444444444");
             this.skinName = "GameOverSkin";
             this.closeBtn.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onClose, this);
         };
-        /**
-         * setScoreText
-         */
-        GameOver.prototype.setScoreText = function (score) {
-            console.log("setScoreText");
-            this.scoreText.text = score.toString();
+        GameOver.prototype.setJinText = function (score) {
+            this.jinText.text = score.toString();
+        };
+        GameOver.prototype.setYinText = function (score) {
+            this.yinText.text = score.toString();
         };
         GameOver.prototype.destroy = function () {
-            console.log("dddddddddd====destroy");
             this.closeBtn.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.onClose, this);
-            this.removeChild(this.scoreText);
+            this.removeChild(this.jinText);
+            this.removeChild(this.yinText);
             this.removeChild(this.closeBtn);
-            this.scoreText = null;
+            this.jinText = null;
+            this.yinText = null;
             this.closeBtn = null;
             this.skinName = null;
         };

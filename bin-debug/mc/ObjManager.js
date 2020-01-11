@@ -32,28 +32,6 @@ var goldman;
             enumerable: true,
             configurable: true
         });
-        //移除一定范围内的物体
-        ObjManager.prototype.removeObjsAtAreaByHitObj = function (hitObj) {
-            if (hitObj.type == "TNT") {
-                var removeObjsArr = [];
-                for (var i in this._objsArr) {
-                    var o = this._objsArr[i];
-                    if (o !== hitObj) {
-                        var oPoint = new egret.Point(o.x + o.width / 2, o.y + o.height / 2);
-                        var hPoint = new egret.Point(hitObj.x + o.width / 2, hitObj.y + o.height / 2);
-                        var distance = egret.Point.distance(oPoint, hPoint);
-                        if (distance <= 200) {
-                            removeObjsArr.push(o);
-                        }
-                    }
-                }
-                for (var i in removeObjsArr) {
-                    var o = removeObjsArr[i];
-                    o.destory();
-                    this.removeObj(o);
-                }
-            }
-        };
         ObjManager.prototype.removeObj = function (obj) {
             console.log("从数组中removeObj");
             var currHookObj = this._objsArr.splice(this._objsArr.indexOf(obj), 1)[0];

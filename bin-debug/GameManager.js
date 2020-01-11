@@ -5,10 +5,10 @@ var goldman;
 (function (goldman) {
     var GameManager = (function () {
         function GameManager() {
-            this.score = 0;
-            this.goal = 100;
             this.missionArr = [];
             this.LEVEL_TIME = 60;
+            this.jinScore = 0;
+            this.yinScore = 0;
             this.isOver = false;
         }
         GameManager.getInstance = function () {
@@ -21,7 +21,6 @@ var goldman;
             this.missionArr = RES.getRes("mission_json");
             this.gameScene = new goldman.GameScene();
             this.GameStage.addChild(this.gameScene);
-            this.gameScene.setGoalText(this.goal);
             // this.gameScene.addEventListener(GameScene.TRIGGER_START_GO, this.onStartGo, this); //点击勾取
             this.objManager = new goldman.ObjManager();
             this.GameStage.addChild(this.objManager);
@@ -30,7 +29,7 @@ var goldman;
             this.hookManager.addEventListener(goldman.HookManager.HOOK_MANAGER_EVENT, this.onHookManagerEventHandler, this);
             this.GameStage.addChild(this.hookManager);
             this.hookManager.x = this.GameStage_width / 2;
-            this.hookManager.y = 158;
+            this.hookManager.y = 330;
             this.gameOver = new goldman.GameOver();
             this.GameStage.addEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
             this.createGameTimeInterval();
@@ -61,9 +60,9 @@ var goldman;
             that.GameStage.removeChild(that.objManager);
             var timeHandle = setTimeout(function () {
                 //执行事件
-                console.log("alert msgbox!!!!!");
                 that.GameStage.addChild(that.gameOver);
-                that.gameOver.setScoreText(that.score);
+                that.gameOver.setJinText(that.jinScore);
+                that.gameOver.setYinText(that.yinScore);
                 that.gameOver.addEventListener(goldman.GameOver.CLOSE_GAMEOVER_EVENT, that.onDestroyGameOver, that);
                 clearTimeout(timeHandle);
             }, that, 500);
@@ -100,12 +99,16 @@ var goldman;
                     }
                     var catchObj = data.catchObj;
                     if (catchObj) {
-                        console.log("obj.score " + catchObj.score);
-                        this.score += catchObj.score;
-                        this.gameScene.setScoreText(this.score);
-                        goldman.GoldEffectUtils.showTips(catchObj.score.toString(), false);
-                        for (var i = 0; i < 3; i++) {
-                            goldman.GoldEffectUtils.createImg();
+                        if (catchObj.type == 0) {
+                            this.yinScore += catchObj.score;
+                            this.gameScene.setYinScoreText(this.yinScore);
+                        }
+                        else if (catchObj.type == 1) {
+                            this.jinScore += catchObj.score;
+                            this.gameScene.setJinScoreText(this.jinScore);
+                        }
+                        for (var i = 0; i < catchObj.score / 10; i++) {
+                            goldman.GoldEffectUtils.createSeeds(catchObj.type);
                         }
                     }
                     break;
@@ -128,22 +131,11 @@ var goldman;
                 var obj = goldsArr[i];
                 var isHit = goldman.GameUtil.hitTestObjByParentObj(hookBmp, obj, this.GameStage); //检测钩子和物体是否相撞
                 if (isHit) {
-                    if (obj.type == "TNT") {
-                        me.hookManager.setHookBackV(0);
-                        me.objManager.removeObjsAtAreaByHitObj(obj);
-                        setTimeout(function () {
-                            me.hookManager.setHookBackV(obj.speed);
-                            me.hookManager.setCatchObj(obj);
-                            obj.destory();
-                        }, 300);
-                    }
-                    else {
-                        me.hookManager.setHookBackV(obj.speed);
-                        me.hookManager.setCatchObj(obj);
-                        me.objManager.removeObj(obj);
-                        obj.destory();
-                        // let point = me.hookManager.getHookPoint()
-                    }
+                    me.hookManager.setHookBackV(obj.speed);
+                    me.hookManager.setCatchObj(obj);
+                    me.objManager.removeObj(obj);
+                    obj.destory();
+                    // let point = me.hookManager.getHookPoint()
                     break;
                 }
             }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<e:Skin class="checkBoxSkin" states="up,down,disabled,upAndSelected,downAndSelected,disabledAndSelected" xmlns:e="http://ns.egret.com/eui">
+    <e:Group width="100%" height="100%">
+        <e:layout>
+            <e:HorizontalLayout verticalAlign="middle"/>
+        </e:layout>
+        <e:Image fillMode="scale" alpha="1" alpha.disabled="0.5" alpha.down="1"
+                 source="music_off_png"
+                 source.upAndSelected="music_on_png"
+                 source.downAndSelected="music_on_png"
+                 source.disabledAndSelected="music_on_png"/>
+    </e:Group>
+</e:Skin>

@@ -1,11 +1,19 @@
 namespace goldman {
   export class GoldEffectUtils {
     //dir是金币飞到的玩家位置
-    static createImg(): void {
-      var goldImg = createBitmapByName("coin_png");
+    static createSeeds(type: number): void {
+      var goldImg: egret.Bitmap
+      var head: any
+      if (type == 0) {
+        goldImg = createBitmapByName("yin_animation_png");
+        head = { x: 405, y: 50 };
+      } else if (type == 1) {
+        goldImg = createBitmapByName("jin_animation_png");
+        head = { x: 160, y: 50 };
+      }
       GameManager.getInstance().GameStage.addChild(goldImg);
       var goldX = GameManager.getInstance().GameStage_width / 2 - goldImg.width / 2;
-      var goldY = 250;
+      var goldY = 330;
       var tweenTime = 600;
       var randomNum = Math.round((Math.random() * 40 + 1));//随机增减xy值（使得金币看起来是散乱的）
       var randomTime = Math.floor((100 - 200 + 1) * Math.random() + 100)
@@ -37,10 +45,8 @@ namespace goldman {
         egret.Tween.get(goldImg).to({ alpha: 0 }, 500).call(onComplete2, this);//隐藏金币
       };
       goldImg.visible = true;
-
-      var head = { x: 210, y: 40 };
       egret.Tween.get(goldImg).wait(randomTime)
-        .to({ y: 300, alpha: 1 }, 300, egret.Ease.sineIn)
+        .to({ y: 420, alpha: 1 }, 300, egret.Ease.sineIn)
         .wait(100)
         .to({ x: head.x, y: head.y, alpha: 1 }, tweenTime, egret.Ease.sineOut)
         .call(onComplete1, this);
@@ -81,7 +87,7 @@ namespace goldman {
         }
       };
       egret.Tween.get(effectTips).to({ scaleX: 1.3, scaleY: 1.3, alpha: 1 }, 200).wait(200)
-      .to({ y: 0, alpha: 0 }, 600, egret.Ease.sineOut).call(onComplete, this);
+        .to({ y: 0, alpha: 0 }, 600, egret.Ease.sineOut).call(onComplete, this);
     }
   }
 }

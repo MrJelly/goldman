@@ -1,1 +1,0 @@
-//# sourceMappingURL=Gold2.js.map

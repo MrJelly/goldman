@@ -4,7 +4,7 @@ module goldman {
 		public catchObj: Obj;
 
 		private BASE_ROTATION_MAX: number = 60;//钩子默认旋转角度
-		private LINE_HEIGHT_DEFAULT: number = 30;//绳子默认长度
+		private LINE_HEIGHT_DEFAULT: number = 10;//绳子默认长度
 		private GO_V_DEFAULT: number = 8;//钩子默认出击速度
 		private BACK_V_DEFAULT: number = 10;//钩子默认缩回速度
 

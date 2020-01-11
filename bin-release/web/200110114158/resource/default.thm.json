@@ -1,9 +1,0 @@
-{
-	"skins": {},
-	"autoGenerateExmlsList": true,
-	"exmls": [
-		"resource/skins/GameOverSkin.exml",
-		"resource/skins/GameSceneSkin.exml"
-	],
-	"path": "resource/default.thm.json"
-}

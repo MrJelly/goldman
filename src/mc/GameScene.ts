@@ -1,13 +1,11 @@
 module goldman {
     export class GameScene extends eui.Component {
 
-        private scoreTextField: eui.Label;
-        private goalTextField: eui.Label;
+        private jinTextField: eui.Label;
+        private yinTextField: eui.Label;
         private timeTextField: eui.Label;
-        private bgMusic: egret.Sound;
-
-
-        // public static TRIGGER_START_GO: string = 'TRIGGER_START_GO';
+        private checkbox: eui.CheckBox;
+        private gameArea: eui.Image;
 
         public constructor() {
             super();
@@ -15,40 +13,61 @@ module goldman {
         }
 
         private AddToStage(e: egret.Event): void {
-            console.log("AddToStage")
             this.init();
         }
         private init() {
-            console.log("GameSceneSkin")
             this.skinName = "GameSceneSkin";
             this.touchEnabled = true;
-            this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
-            SoundManager.getInstance().PlayBGM()
+            this.gameArea.addEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this);
+
+            if (SoundManager.getInstance().IsSound) {
+                this.checkbox.selected = true
+                SoundManager.getInstance().PlayBGM()
+            } else {
+                this.checkbox.selected = false
+            }
+            this.checkbox.addEventListener(egret.Event.CHANGE, this.changeSound, this);
+        }
+
+        private changeSound(e: egret.Event): void {
+            if (this.checkbox.selected) {
+                SoundManager.getInstance().IsSound = true
+                SoundManager.getInstance().PlayBGM()
+            } else {
+                SoundManager.getInstance().IsSound = false
+                SoundManager.getInstance().StopBGM()
+            }
         }
 
         private clickStartGo(e: egret.TouchEvent): void {
             GameManager.getInstance().onStartGo()
         }
-        public setScoreText(score: number): void {
-            this.scoreTextField.text = score.toString();
-        }
 
-        public setGoalText(goalScore: number): void {
-            this.goalTextField.text = goalScore.toString();
+        public setYinScoreText(score: number): void {
+            this.yinTextField.text = score.toString();
+        }
+        public setJinScoreText(score: number): void {
+            this.jinTextField.text = score.toString();
         }
 
         public setTimeText(time: number): void {
-            this.timeTextField.text = time + "s";
+            this.timeTextField.text = time.toString();
         }
 
         public destroy(): void {
-            this.removeChild(this.scoreTextField);
-            this.removeChild(this.goalTextField);
+            this.checkbox.removeEventListener(egret.Event.CHANGE, this.changeSound, this);
+            this.gameArea.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this)
+            this.removeChild(this.jinTextField);
+            this.removeChild(this.yinTextField);
             this.removeChild(this.timeTextField);
-            this.scoreTextField = null;
-            this.goalTextField = null;
+            this.removeChild(this.checkbox);
+            this.removeChild(this.gameArea);
+            this.jinTextField = null;
+            this.yinTextField = null;
             this.timeTextField = null;
-            this.removeEventListener(egret.TouchEvent.TOUCH_TAP, this.clickStartGo, this)
+            this.checkbox = null;
+            this.gameArea = null;
+            
         }
     }
 }

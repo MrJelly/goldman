@@ -15,7 +15,7 @@ var goldman;
         function HookManager() {
             var _this = _super.call(this) || this;
             _this.BASE_ROTATION_MAX = 60; //钩子默认旋转角度
-            _this.LINE_HEIGHT_DEFAULT = 30; //绳子默认长度
+            _this.LINE_HEIGHT_DEFAULT = 10; //绳子默认长度
             _this.GO_V_DEFAULT = 8; //钩子默认出击速度
             _this.BACK_V_DEFAULT = 10; //钩子默认缩回速度
             _this.isGo = false; //钩子是否在抓取

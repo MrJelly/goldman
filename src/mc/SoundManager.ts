@@ -30,11 +30,10 @@ namespace goldman {
             this._lastsound.load("resource/sound/last-10s-sound.mp3");
         }
         public PlayBGM() {
-            if (this.IsMusic) {
+            if (this.IsSound) {
                 this._bgm_channel = this._bgm.play(0, 0);
-                // this._bgm_channel.volume=0.1;
+                this._bgm_channel.volume=0.1;
             }
-
         }
         public StopBGM() {
             if (this._bgm_channel != null) {
@@ -76,26 +75,7 @@ namespace goldman {
                 this._lastsound.play(0, 1);
             }
         }
-        //音乐是否播放，保存设置
-        public set IsMusic(value) {
-            if (!value) {
-                egret.localStorage.setItem("ismusic", "0");
-                this.StopBGM();
-            } else {
-                egret.localStorage.setItem("ismusic", "1");
-                this.PlayBGM();
-            }
-        }
-        public get IsMusic(): boolean {
-            var b = egret.localStorage.getItem("ismusic");
-            if (b == null || b == "") {
-                return true;
-            }
-            else {
-                return b == "1";
-            }
-        }
-        //声效是否播放，保存设置
+        //声音是否播放，保存设置
         public set IsSound(value) {
             if (value) {
                 egret.localStorage.setItem("isSound", "1");
@@ -106,7 +86,7 @@ namespace goldman {
         public get IsSound(): boolean {
             var b = egret.localStorage.getItem("isSound");
             if (b == null || b == "") {
-                return true;
+                return false;
             }
             else {
                 return b == "1";

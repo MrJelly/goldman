@@ -20,9 +20,17 @@ module goldman {
 			this.addChild(this._hookBmp);
 		}
 
+		private repalceStr(str:string):string{
+			let reg = /_/g;
+			let insertStr = "back_"
+			let _str = str.replace(reg,"_"+insertStr)
+			console.log("_str====",_str)
+			return _str
+		}
+
 		public setBackHookType(typeStr: string = ""): void {
 			if (typeStr) {
-				this._backHookBmp = goldman.createBitmapByName(typeStr + "_back");
+				this._backHookBmp = goldman.createBitmapByName(this.repalceStr(typeStr));
 				this.addChild(this._backHookBmp);
 				this._backHookBmp.x = this._hookBmp.x;
 				this._backHookBmp.y = this._hookBmp.y;
@@ -39,16 +47,16 @@ module goldman {
 		public redrawHook(lineHeight: number = 0): void {
 			this._hookBmp.y = lineHeight;
 			this.line.graphics.clear();
-			this.line.graphics.lineStyle(3, 0x3c3841);
+			this.line.graphics.lineStyle(8, 0xffffff);
 			this.line.graphics.moveTo(0, 0);
 			this.line.graphics.lineTo(0, lineHeight);
 			this.line.graphics.endFill();
 			//绳子上的小点 模拟铁链
-			for (var i = 10; i <= lineHeight; i += 10) {
-				this.line.graphics.beginFill(0x3c3841);
-				this.line.graphics.drawCircle(0, i, 3);
-				this.line.graphics.endFill();
-			}
+			// for (var i = 10; i <= lineHeight; i += 10) {
+			// 	this.line.graphics.beginFill(0x3c3841);
+			// 	this.line.graphics.drawCircle(0, i, 3);
+			// 	this.line.graphics.endFill();
+			// }
 			this._hookBmp.x = -this._hookBmp.width / 2;
 			if (this._backHookBmp) {
 				this._backHookBmp.y = lineHeight;

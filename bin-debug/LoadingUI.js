@@ -70,9 +70,12 @@ var LoadingUI = (function (_super) {
     LoadingUI.prototype.createView = function () {
         this.w = egret.MainContext.instance.stage.stageWidth;
         this.h = egret.MainContext.instance.stage.stageHeight;
-        console.log("====>>>", this.w, this.h);
+        var bg = new egret.Shape();
+        bg.graphics.beginFill(0x000000, 0.5);
+        bg.graphics.drawRect(0, 0, this.w, this.h);
+        bg.graphics.endFill();
+        this.addChild(bg);
         this.pgBg = new egret.Bitmap;
-        console.log("=====>>>", RES.getRes);
         this.pgBg.texture = RES.getRes("PreLoadingBarBg_png");
         this.pgBg.x = this.w / 2 - this.pgBg.width / 2;
         this.pgBg.y = this.h / 2 - this.pgBg.height / 2;
@@ -80,7 +83,7 @@ var LoadingUI = (function (_super) {
         this.pgBar = new egret.Bitmap;
         this.pgBar.texture = RES.getRes("PreLoadingBar_png");
         this.pgBar.x = this.w / 2 - this.pgBar.width / 2;
-        this.pgBar.y = this.pgBg.y + 20;
+        this.pgBar.y = this.pgBg.y + 12;
         this.addChild(this.pgBar);
         this.textField = new egret.TextField();
         this.textField.size = 24;
@@ -91,16 +94,15 @@ var LoadingUI = (function (_super) {
         this.addChild(this.textField);
         this.textField.width = 100;
         this.textField.x = this.w / 2 - this.textField.width / 2;
-        this.textField.y = this.pgBg.y + 20;
+        this.textField.y = this.pgBg.y + 12;
         this.textField.textAlign = "center";
         this.textField.text = "0%";
-        console.log("======>>", this.pgBg.width);
         this.pgBar.width = 0;
     };
     LoadingUI.prototype.onProgress = function (current, total) {
         var rate = Math.round((current / total) * 100);
         this.textField.text = rate + "%";
-        this.pgBar.width = this.pgBg.width * (current / total);
+        this.pgBar.width = 376 * (current / total);
     };
     return LoadingUI;
 }(eui.UILayer));

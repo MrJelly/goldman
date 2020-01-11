@@ -13,12 +13,12 @@ namespace goldman {
     public GameStage: egret.Stage;
     public GameStage_width: number;
     public GameStage_height: number;
-    private score: number = 0;
-    private goal:number = 100;
-    private missionArr:any =[];
+    private missionArr: any = [];
 
     private levelTimer: egret.Timer;
     private LEVEL_TIME: number = 60;
+    private jinScore: number = 0;
+    private yinScore: number = 0;
 
     private hookManager: HookManager;
     private objManager: ObjManager;
@@ -31,7 +31,6 @@ namespace goldman {
       this.gameScene = new GameScene();
 
       this.GameStage.addChild(this.gameScene);
-      this.gameScene.setGoalText(this.goal);
       // this.gameScene.addEventListener(GameScene.TRIGGER_START_GO, this.onStartGo, this); //点击勾取
       this.objManager = new ObjManager();
 
@@ -43,7 +42,7 @@ namespace goldman {
 
       this.GameStage.addChild(this.hookManager);
       this.hookManager.x = this.GameStage_width / 2;
-      this.hookManager.y = 158;
+      this.hookManager.y = 330;
 
       this.gameOver = new GameOver();
 
@@ -80,9 +79,9 @@ namespace goldman {
       that.GameStage.removeChild(that.objManager);
       var timeHandle: number = setTimeout(function () {
         //执行事件
-        console.log("alert msgbox!!!!!")
         that.GameStage.addChild(that.gameOver);
-        that.gameOver.setScoreText(that.score);
+        that.gameOver.setJinText(that.jinScore);
+        that.gameOver.setYinText(that.yinScore);
         that.gameOver.addEventListener(GameOver.CLOSE_GAMEOVER_EVENT, that.onDestroyGameOver, that)
         clearTimeout(timeHandle);
       }, that, 500);
@@ -120,12 +119,15 @@ namespace goldman {
           if (this.isOver) { return }
           var catchObj: Obj = data.catchObj;
           if (catchObj) {
-            console.log("obj.score " + catchObj.score);
-            this.score += catchObj.score;
-            this.gameScene.setScoreText(this.score);
-            GoldEffectUtils.showTips(catchObj.score.toString(),false)
-            for (let i = 0; i < 3; i++) {
-              GoldEffectUtils.createImg();
+            if(catchObj.type==0){
+                this.yinScore += catchObj.score;
+                this.gameScene.setYinScoreText(this.yinScore);
+            }else if(catchObj.type==1){
+                this.jinScore += catchObj.score;
+                this.gameScene.setJinScoreText(this.jinScore);
+            }
+            for (let i = 0; i < catchObj.score/10; i++) {
+              GoldEffectUtils.createSeeds(catchObj.type);
             }
           }
           break;
@@ -148,21 +150,11 @@ namespace goldman {
         var obj: Obj = goldsArr[i];
         var isHit: boolean = GameUtil.hitTestObjByParentObj(hookBmp, obj, this.GameStage);//检测钩子和物体是否相撞
         if (isHit) {
-          if (obj.type == "TNT") {
-            me.hookManager.setHookBackV(0);
-            me.objManager.removeObjsAtAreaByHitObj(obj);
-            setTimeout(function () {
-              me.hookManager.setHookBackV(obj.speed);
-              me.hookManager.setCatchObj(obj);
-              obj.destory();
-            }, 300);
-          } else {
-              me.hookManager.setHookBackV(obj.speed);
-              me.hookManager.setCatchObj(obj);
-              me.objManager.removeObj(obj);
-              obj.destory();
-              // let point = me.hookManager.getHookPoint()
-          }
+          me.hookManager.setHookBackV(obj.speed);
+          me.hookManager.setCatchObj(obj);
+          me.objManager.removeObj(obj);
+          obj.destory();
+          // let point = me.hookManager.getHookPoint()
           break;
         }
       }

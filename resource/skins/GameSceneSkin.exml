@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="GameSceneSkin" width="750" height="292.2" xmlns:e="http://ns.egret.com/eui">
-	<e:Image width="750" height="1200" x="0" y="0" source="bgall_png"/>
-	<e:Image width="168" height="151" x="330" y="34" source="hero_png"/>
-	<e:Label id="goalTextField" text="100" size="30" textColor="0x2C2020" width="60" textAlign="center" height="38" x="168" y="107.418" verticalAlign="middle"/>
-	<e:Label text="0" x="194" y="34" size="30" textColor="0x2C2020" id="scoreTextField" width="60" textAlign="center" height="38" border="false" verticalAlign="middle"/>
-	<e:Label id="timeTextField" text="0s" x="585" y="120" size="28" width="90" height="30" textAlign="center" verticalAlign="middle" textColor="0xFFD745"/>
+<e:Skin class="GameSceneSkin" width="750" height="1296" xmlns:e="http://ns.egret.com/eui">
+	<e:Image width="750" height="310" x="0" y="0" source="bg_head_png" anchorOffsetY="0"/>
+	<e:Image id="gameArea" width="750" height="1090" x="0" y="310" source="bg_bottom_png"/>
+	<e:Image width="206" height="172" x="272" y="170" source="ji_png"/>
+	<e:Image width="226" height="84" x="20" y="15" source="jin_png" anchorOffsetX="0" anchorOffsetY="0"/>
+	<e:Image width="226" height="84" x="270" y="15" source="yin_png"/>
+	<e:Image width="206" height="84" x="524" y="15" source="time_png"/>
+	<e:Label id="yinTextField" text="0" size="36" width="100" textAlign="center" height="40" x="368" y="45" verticalAlign="middle" textColor="0xFFFFFF"/>
+	<e:Label text="0" x="118" y="45" size="36" id="jinTextField" width="100" textAlign="center" height="40" border="false" verticalAlign="middle" textColor="0xFFFFFF"/>
+	<e:Label id="timeTextField" text="0" x="608.224" y="43.653" size="36" width="90" height="40" textAlign="center" verticalAlign="middle" textColor="0xFFFFFF"/>
+	<e:Label text="s" x="680.543" y="50.194"/>
+	<e:CheckBox id="checkbox" label="CheckBox" x="648.204" y="120.49" skinName="checkBoxSkin" width="80" height="80"/>
 </e:Skin>

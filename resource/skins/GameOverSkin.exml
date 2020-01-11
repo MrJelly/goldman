@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<e:Skin class="GameOverSkin" width="750" height="1206" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
-<e:Image anchorOffsetX="0" width="535.34" horizontalCenter="0" verticalCenter="0" source="over_png"/>
-<e:Image id="closeBtn" horizontalCenter="0" verticalCenter="112" source="clearok_png"/>
-	<e:Label id="scoreText" text="0" anchorOffsetX="0" width="206.987" anchorOffsetY="0" height="61.433" size="50" fontFamily="Arial" textColor="0xFF0000" verticalAlign="middle" verticalCenter="0" horizontalCenter="0" textAlign="center"/>
+<e:Skin class="GameOverSkin" width="750" height="1296" xmlns:e="http://ns.egret.com/eui" xmlns:w="http://ns.egret.com/wing">
+	<e:Rect width="750" height="1296" x="0" y="0" fillAlpha="0.5"/>
+<e:Image anchorOffsetX="0" source="over_png" verticalCenter="0" horizontalCenter="5" left="40" right="30" top="297" bottom="297"/>
+<e:Image id="closeBtn" horizontalCenter="284" verticalCenter="-286" source="clearok_png" x="600"/>
+	<e:Label id="jinText" text="0" anchorOffsetX="0" width="200" anchorOffsetY="0" height="80" size="60" fontFamily="Arial" textColor="0xFFFFFF" verticalAlign="middle" verticalCenter="-73" horizontalCenter="28" textAlign="center" y="545"/>
+	<e:Label id="yinText" text="0" anchorOffsetX="0" width="200" anchorOffsetY="0" height="80" size="60" fontFamily="Arial" textColor="0xFFFFFF" verticalAlign="middle" verticalCenter="156" horizontalCenter="28" textAlign="center" x="300" y="780"/>
 </e:Skin>

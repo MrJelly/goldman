@@ -30,13 +30,13 @@ var goldman;
             this.addChild(this.objBmp);
             this.x = this._seeds.posX;
             this.y = this._seeds.posY;
-            var oMoneyTextField = new egret.TextField();
-            this.addChild(oMoneyTextField);
-            oMoneyTextField.textAlign = egret.HorizontalAlign.LEFT;
-            oMoneyTextField.textColor = 0x000000;
-            oMoneyTextField.width = 22;
-            oMoneyTextField.size = 18;
-            oMoneyTextField.text = this._seeds.score.toString();
+            // var oMoneyTextField = new egret.TextField();
+            // this.addChild(oMoneyTextField);
+            // oMoneyTextField.textAlign = egret.HorizontalAlign.LEFT;
+            // oMoneyTextField.textColor = 0xffffff;
+            // oMoneyTextField.width = 22;
+            // oMoneyTextField.size = 18;
+            // oMoneyTextField.text = this._seeds.score.toString();
         };
         Obj.prototype.removeFromParent = function () {
             this.parent.removeChild(this);
@@ -67,13 +67,12 @@ var goldman;
         });
         Object.defineProperty(Obj.prototype, "type", {
             get: function () {
-                return "";
+                return this._seeds.type;
             },
             enumerable: true,
             configurable: true
         });
         Obj.prototype.destory = function () {
-            console.log("物体销毁");
             this.removeEventListener(egret.Event.ADDED_TO_STAGE, this.onAddToStage, this);
             goldman.removeAllchild(this);
         };
