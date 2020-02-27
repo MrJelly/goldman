@@ -63,6 +63,7 @@ var goldman;
                 that.GameStage.addChild(that.gameOver);
                 that.gameOver.setJinText(that.jinScore);
                 that.gameOver.setYinText(that.yinScore);
+                that.initRequest();
                 that.gameOver.addEventListener(goldman.GameOver.CLOSE_GAMEOVER_EVENT, that.onDestroyGameOver, that);
                 clearTimeout(timeHandle);
             }, that, 500);
@@ -70,6 +71,20 @@ var goldman;
         GameManager.prototype.onDestroyGameOver = function (e) {
             this.gameOver.removeEventListener(goldman.GameOver.CLOSE_GAMEOVER_EVENT, this.onDestroyGameOver, this);
             this.GameStage.removeChild(this.gameOver);
+        };
+        GameManager.prototype.initRequest = function () {
+            goldman.Http.create()
+                .success(this.onRequestSuccess, this)
+                .error(this.onRequestError, this)
+                .add('')
+                .dataFormat(egret.URLLoaderDataFormat.TEXT)
+                .post('https://happy.s1.anxinabc.com/api/v1/appconfig'); //也可以是post方法
+        };
+        GameManager.prototype.onRequestSuccess = function (data) {
+            console.log("==>>>>", data);
+        };
+        GameManager.prototype.onRequestError = function () {
+            console.log("==>>>>");
         };
         GameManager.prototype.destoryGameScene = function () {
             this.GameStage.removeChild(this.gameScene);

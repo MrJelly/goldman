@@ -29,6 +29,7 @@ module goldman {
             this.checkbox.addEventListener(egret.Event.CHANGE, this.changeSound, this);
         }
 
+
         private changeSound(e: egret.Event): void {
             if (this.checkbox.selected) {
                 SoundManager.getInstance().IsSound = true
@@ -67,7 +68,7 @@ module goldman {
             this.timeTextField = null;
             this.checkbox = null;
             this.gameArea = null;
-            
+
         }
     }
 }

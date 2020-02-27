@@ -82,6 +82,9 @@ namespace goldman {
         that.GameStage.addChild(that.gameOver);
         that.gameOver.setJinText(that.jinScore);
         that.gameOver.setYinText(that.yinScore);
+
+        that.initRequest()
+
         that.gameOver.addEventListener(GameOver.CLOSE_GAMEOVER_EVENT, that.onDestroyGameOver, that)
         clearTimeout(timeHandle);
       }, that, 500);
@@ -89,6 +92,21 @@ namespace goldman {
     private onDestroyGameOver(e: egret.Event) {
       this.gameOver.removeEventListener(GameOver.CLOSE_GAMEOVER_EVENT, this.onDestroyGameOver, this)
       this.GameStage.removeChild(this.gameOver);
+    }
+
+    private initRequest() {
+      goldman.Http.create()
+        .success(this.onRequestSuccess, this)
+        .error(this.onRequestError, this)
+        .add('')
+        .dataFormat(egret.URLLoaderDataFormat.TEXT)
+        .post('https://happy.s1.anxinabc.com/api/v1/appconfig');//也可以是post方法
+    }
+    private onRequestSuccess(data) {
+      console.log("==>>>>", data)
+    }
+    private onRequestError() {
+      console.log("==>>>>")
     }
 
     private destoryGameScene(): void {
@@ -119,14 +137,14 @@ namespace goldman {
           if (this.isOver) { return }
           var catchObj: Obj = data.catchObj;
           if (catchObj) {
-            if(catchObj.type==0){
-                this.yinScore += catchObj.score;
-                this.gameScene.setYinScoreText(this.yinScore);
-            }else if(catchObj.type==1){
-                this.jinScore += catchObj.score;
-                this.gameScene.setJinScoreText(this.jinScore);
+            if (catchObj.type == 0) {
+              this.yinScore += catchObj.score;
+              this.gameScene.setYinScoreText(this.yinScore);
+            } else if (catchObj.type == 1) {
+              this.jinScore += catchObj.score;
+              this.gameScene.setJinScoreText(this.jinScore);
             }
-            for (let i = 0; i < catchObj.score/10; i++) {
+            for (let i = 0; i < catchObj.score / 10; i++) {
               GoldEffectUtils.createSeeds(catchObj.type);
             }
           }
