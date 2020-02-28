@@ -9,6 +9,7 @@ module goldman {
 		private BACK_V_DEFAULT: number = 10;//钩子默认缩回速度
 
 		private direction: string;//当前方向
+		private tempDirection: string = "left";//临时保存当前方向
 		private lineHeight: number;//绳子当前长度
 		private goV: number;//钩子当前出击速度
 		private backV: number;//钩子当前缩回速度
@@ -50,7 +51,7 @@ module goldman {
 		}
 
 		public startRotate(): void {
-			this.direction = "left";
+			this.direction = this.tempDirection;
 		}
 
 		private onUpdateRotation(): void {
@@ -69,7 +70,9 @@ module goldman {
 		}
 
 		public startGo(): void {
+			if(this.isGo) return;
 			this.isGo = true;
+			this.tempDirection = this.direction;
 			this.direction = "stop";
 			SoundManager.getInstance().PlayPull();
 		}
@@ -122,7 +125,7 @@ module goldman {
 					if (that.backV >= backV) {
 						clearInterval(tick)
 					}
-				}, 40)
+				}, 50)
 			}
 		}
 

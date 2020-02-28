@@ -18,6 +18,7 @@ var goldman;
             _this.LINE_HEIGHT_DEFAULT = 10; //绳子默认长度
             _this.GO_V_DEFAULT = 8; //钩子默认出击速度
             _this.BACK_V_DEFAULT = 10; //钩子默认缩回速度
+            _this.tempDirection = "left"; //临时保存当前方向
             _this.isGo = false; //钩子是否在抓取
             _this.isBack = false; //钩子是否在收回
             _this.addEventListener(egret.Event.ADDED_TO_STAGE, _this.onAddToStage, _this);
@@ -43,7 +44,7 @@ var goldman;
             }
         };
         HookManager.prototype.startRotate = function () {
-            this.direction = "left";
+            this.direction = this.tempDirection;
         };
         HookManager.prototype.onUpdateRotation = function () {
             if (this.direction == "left") {
@@ -62,7 +63,10 @@ var goldman;
             }
         };
         HookManager.prototype.startGo = function () {
+            if (this.isGo)
+                return;
             this.isGo = true;
+            this.tempDirection = this.direction;
             this.direction = "stop";
             goldman.SoundManager.getInstance().PlayPull();
         };
@@ -109,7 +113,7 @@ var goldman;
                     if (that.backV >= backV) {
                         clearInterval(tick_1);
                     }
-                }, 40);
+                }, 50);
             }
         };
         HookManager.prototype.goComplete = function () {
