@@ -31,8 +31,58 @@ var goldman;
             this.hookManager.x = this.GameStage_width / 2;
             this.hookManager.y = 330;
             this.gameOver = new goldman.GameOver();
+            this.createUserData();
+            // this.initUserData();
             this.GameStage.addEventListener(egret.Event.ENTER_FRAME, this.onGameEnterFrame, this);
             this.createGameTimeInterval();
+        };
+        GameManager.prototype.initUserData = function () {
+            var url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582977071549&di=679926970324b1383796ee137203125f&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg";
+            // this.gameScene.setUserIcon(url);
+        };
+        GameManager.prototype.createUserData = function () {
+            var self = this;
+            var url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582977071549&di=679926970324b1383796ee137203125f&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg";
+            var imgLoader = new egret.ImageLoader();
+            imgLoader.crossOrigin = "anonymous"; // 这个好像没什么用处，加不加都可以
+            imgLoader.once(egret.Event.COMPLETE, function (evt) {
+                if (evt.currentTarget.data) {
+                    egret.log("加载头像成功: " + evt.currentTarget.data);
+                    // 创建一个容器
+                    var container = new egret.DisplayObjectContainer();
+                    var texture = new egret.Texture();
+                    texture.bitmapData = evt.currentTarget.data;
+                    var bitmap = new egret.Bitmap(texture);
+                    // 将头像放到容器内
+                    container.addChild(bitmap);
+                    var renderTexture = new egret.RenderTexture();
+                    // 将容器绘制成纹理
+                    renderTexture.drawToTexture(container);
+                    // 将纹理赋给头像组件
+                    var headicon = new egret.Bitmap(renderTexture);
+                    self.GameStage.addChild(headicon);
+                    headicon.width = 100;
+                    headicon.height = 100;
+                    headicon.x = 325;
+                    headicon.y = 230;
+                    // self.headicon.source = renderTexture;//赋给Image组件
+                    // 释放纹理
+                    bitmap.texture.dispose();
+                    bitmap = null;
+                    var circle = new egret.Shape();
+                    circle.graphics.beginFill(0x000000);
+                    circle.x = 325;
+                    circle.y = 230;
+                    circle.graphics.drawCircle(50, 50, 50);
+                    circle.graphics.endFill();
+                    this.GameStage.addChild(circle);
+                    headicon.mask = circle;
+                }
+            }, this);
+            imgLoader.once(egret.IOErrorEvent.IO_ERROR, function (evt) {
+                egret.log("加载头像失败");
+            }, this);
+            imgLoader.load(url.replace(/[\\]/g, '')); // 去除链接中的转义字符‘\’[/mw_shl_code]
         };
         GameManager.prototype.createGameTimeInterval = function () {
             this.levelTimer = new egret.Timer(1000, this.LEVEL_TIME);
@@ -77,8 +127,8 @@ var goldman;
                 .success(this.onRequestSuccess, this)
                 .error(this.onRequestError, this)
                 .add('')
-                .dataFormat(egret.URLLoaderDataFormat.TEXT)
-                .post('https://happy.s1.anxinabc.com/api/v1/appconfig'); //也可以是post方法
+                .dataFormat(egret.URLLoaderDataFormat.TEXT);
+            // .post('https://happy.s1.anxinabc.com/api/v1/appconfig');//也可以是post方法
         };
         GameManager.prototype.onRequestSuccess = function (data) {
             console.log("==>>>>", data);

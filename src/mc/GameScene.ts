@@ -5,6 +5,7 @@ module goldman {
         private yinTextField: eui.Label;
         private timeTextField: eui.Label;
         private checkbox: eui.CheckBox;
+        private userIcon: eui.Image;
         private gameArea: eui.Image;
 
         public constructor() {
@@ -27,6 +28,17 @@ module goldman {
                 this.checkbox.selected = false
             }
             this.checkbox.addEventListener(egret.Event.CHANGE, this.changeSound, this);
+        }
+        public setUserIcon(url: string): void{
+        //    this.userIcon.source = url
+        var image = new eui.Image();
+        image.source = url;
+        image.scale9Grid = new egret.Rectangle(10,10,80,80);
+        image.x = 325;
+        image.y = 235;
+        image.width = 100;
+        image.height = 100;
+        this.addChild(image);
         }
 
 

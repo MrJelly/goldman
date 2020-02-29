@@ -33,6 +33,17 @@ var goldman;
             }
             this.checkbox.addEventListener(egret.Event.CHANGE, this.changeSound, this);
         };
+        GameScene.prototype.setUserIcon = function (url) {
+            //    this.userIcon.source = url
+            var image = new eui.Image();
+            image.source = url;
+            image.scale9Grid = new egret.Rectangle(10, 10, 80, 80);
+            image.x = 325;
+            image.y = 235;
+            image.width = 100;
+            image.height = 100;
+            this.addChild(image);
+        };
         GameScene.prototype.changeSound = function (e) {
             if (this.checkbox.selected) {
                 goldman.SoundManager.getInstance().IsSound = true;
