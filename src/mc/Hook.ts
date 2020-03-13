@@ -24,7 +24,6 @@ module goldman {
 			let reg = /_/g;
 			let insertStr = "back_"
 			let _str = str.replace(reg,"_"+insertStr)
-			console.log("_str====",_str)
 			return _str
 		}
 

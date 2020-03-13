@@ -29,15 +29,19 @@ module goldman {
             return this;
         }
         get(url: string) {
-            var req = new egret.URLRequest(url);
+            var req = new egret.URLRequest(goldman.baseUrl + url);
             this.variables && (req.data = this.variables);
             this.loader.load(req);
         }
+
         post(url: string) {
-            var req = new egret.URLRequest(url);
+            var req = new egret.URLRequest(goldman.baseUrl + url);
+            var header: egret.URLRequestHeader = new egret.URLRequestHeader("Authorization", `Bearer ${window['token']}`);
+            req.requestHeaders.push(header);
             req.method = egret.URLRequestMethod.POST;
             this.variables && (req.data = this.variables);
             this.loader.load(req);
+
         }
     }
 }

@@ -29,6 +29,52 @@
 data-content-width="750" data-content-height="1296" data-multi-fingered="2" data-show-fps="false" data-show-log="false" data-show-fps-style="x:0,y:0,size:12,textColor:0xffffff,bgAlpha:0.9">
 </div>
 <script>
+    const localStorage = window.localStorage;
+    const JSON = window.JSON;
+    window.db = {
+        get(name) {
+            let value = localStorage.getItem(name);
+            if (/^\{.*\}$/.test(value)) value = JSON.parse(value);
+            return value
+        },
+        set(name, value) {
+            if (typeof value === typeof {}) value = JSON.stringify(value);
+            return localStorage.setItem(name, value)
+        },
+        remove(name) {
+            return localStorage.removeItem(name)
+        }
+    }
+    window.soogua = {};
+    if (window.android != undefined) {
+        window.soogua = window.android
+    } else if (window.webkit != undefined && window.webkit.messageHandlers.action != undefined) {
+        window.soogua = window.webkit.messageHandlers.action
+    } else {
+        window.soogua = {
+            postMessage(param) {
+                console.log('not in app')
+            }
+        }
+    }
+    let slang = db.get('Accept_Language')
+    console.log("========>>>slang", slang)
+    window.setLoginInfo = (params, lang) => {
+        console.log("========>>>lang", lang)
+        if (params != '') {
+            let AUTH_TOKEN = JSON.parse(params).data.access_token
+            window.token = AUTH_TOKEN
+        }
+    }
+    window.soogua.postMessage(
+        JSON.stringify({
+            action: "getValue",
+            params: JSON.stringify({ url: "" })
+        })
+    );
+
+</script>
+<script>
     var loadScript = function (list, callback) {
         var loaded = 0;
         var loadNext = function () {

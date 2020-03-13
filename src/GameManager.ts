@@ -27,6 +27,9 @@ namespace goldman {
     private isOver: boolean = false;
 
     public initGame(): void {
+      egret.ImageLoader.crossOrigin = "anonymous"; //解决跨域问题
+
+      this.initRequest();
       this.missionArr = RES.getRes("mission_json");
       this.gameScene = new GameScene();
 
@@ -63,7 +66,6 @@ namespace goldman {
       let url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582977071549&di=679926970324b1383796ee137203125f&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg";
 
       let imgLoader = new egret.ImageLoader();
-      imgLoader.crossOrigin = "anonymous";// 这个好像没什么用处，加不加都可以
       imgLoader.once(egret.Event.COMPLETE, function (evt: egret.Event) {
         if (evt.currentTarget.data) {
           egret.log("加载头像成功: " + evt.currentTarget.data);
@@ -80,8 +82,8 @@ namespace goldman {
           // 将纹理赋给头像组件
           let headicon = new egret.Bitmap(renderTexture);
           self.GameStage.addChild(headicon);
-          headicon.width=100;
-          headicon.height=100;
+          headicon.width = 100;
+          headicon.height = 100;
           headicon.x = 325;
           headicon.y = 228;
           // self.headicon.source = renderTexture;//赋给Image组件
@@ -128,7 +130,6 @@ namespace goldman {
       this.onGameOver();
     }
     private onGameOver(): void {
-      console.log("gameOver!!!");
       var that = this
       that.isOver = true;
       that.objManager.destroy();
@@ -139,7 +140,7 @@ namespace goldman {
         that.gameOver.setJinText(that.jinScore);
         that.gameOver.setYinText(that.yinScore);
 
-        that.initRequest()
+        // that.initRequest()
 
         that.gameOver.addEventListener(GameOver.CLOSE_GAMEOVER_EVENT, that.onDestroyGameOver, that)
         clearTimeout(timeHandle);
@@ -151,18 +152,18 @@ namespace goldman {
     }
 
     private initRequest() {
+
       goldman.Http.create()
         .success(this.onRequestSuccess, this)
         .error(this.onRequestError, this)
-        .add('')
+        .add(`x=ssss`)
         .dataFormat(egret.URLLoaderDataFormat.TEXT)
-      // .post('https://happy.s1.anxinabc.com/api/v1/appconfig');//也可以是post方法
+        .post('api/v1/auth/me');//也可以是post方法
     }
     private onRequestSuccess(data) {
       console.log("==>>>>", data)
     }
     private onRequestError() {
-      console.log("==>>>>")
     }
 
     private destoryGameScene(): void {

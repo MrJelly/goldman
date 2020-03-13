@@ -35,12 +35,14 @@ var goldman;
             return this;
         };
         Http.prototype.get = function (url) {
-            var req = new egret.URLRequest(url);
+            var req = new egret.URLRequest(goldman.baseUrl + url);
             this.variables && (req.data = this.variables);
             this.loader.load(req);
         };
         Http.prototype.post = function (url) {
-            var req = new egret.URLRequest(url);
+            var req = new egret.URLRequest(goldman.baseUrl + url);
+            var header = new egret.URLRequestHeader("Authorization", "Bearer " + window['token']);
+            req.requestHeaders.push(header);
             req.method = egret.URLRequestMethod.POST;
             this.variables && (req.data = this.variables);
             this.loader.load(req);

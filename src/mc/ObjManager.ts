@@ -20,7 +20,6 @@ module goldman {
 			return this._objsArr;
 		}
 		public removeObj(obj: Obj): Obj {
-			console.log("从数组中removeObj")
 			var currHookObj: Obj = this._objsArr.splice(this._objsArr.indexOf(obj), 1)[0];
 			this.removeChild(currHookObj);
 			return currHookObj;

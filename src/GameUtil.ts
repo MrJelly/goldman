@@ -7,7 +7,7 @@ module goldman {
 			return rect1.intersects(rect2);
 		}
 	}
-	export var baseUrl: string = "http://"
+	export var baseUrl: string = "https://en-soogua.guaniu.net/"
 	/**
 	 * 根据名称获取位图资源
 	 */

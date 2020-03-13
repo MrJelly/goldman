@@ -101,7 +101,6 @@ var goldman;
             return this.hook.localToGlobal(this.hook.hookBmp.x, this.hook.hookBmp.y);
         };
         HookManager.prototype.setHookBackV = function (backV) {
-            console.log("backV===", backV);
             var that = this;
             that.isBack = true;
             goldman.SoundManager.getInstance().StopPull();
@@ -131,11 +130,9 @@ var goldman;
         HookManager.prototype.setCatchObj = function (obj) {
             this.catchObj = obj;
             var typeStr = obj.image;
-            console.log("catchObj.type: " + typeStr);
             this.hook.setBackHookType(typeStr); //设置钩子的样子
         };
         HookManager.prototype.destroy = function () {
-            console.log("删除hook");
             this.hook.destroy();
             this.removeChild(this.hook);
             this.hook = null;

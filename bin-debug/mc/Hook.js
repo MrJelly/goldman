@@ -29,7 +29,6 @@ var goldman;
             var reg = /_/g;
             var insertStr = "back_";
             var _str = str.replace(reg, "_" + insertStr);
-            console.log("_str====", _str);
             return _str;
         };
         Hook.prototype.setBackHookType = function (typeStr) {

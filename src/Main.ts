@@ -50,7 +50,6 @@ class Main extends eui.UILayer {
     private async runGame() {
         await this.loadResource()
         this.createGameScene();
-        console.log("========runGame")
     }
 
     private async loadResource() {
@@ -62,7 +61,6 @@ class Main extends eui.UILayer {
             await this.loadTheme();
             await RES.loadGroup("preload", 0, loadingView);
             this.stage.removeChild(loadingView);
-            console.log("========>loadResource")
         }
         catch (e) {
             console.error(e);

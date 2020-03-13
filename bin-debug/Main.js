@@ -102,7 +102,6 @@ var Main = (function (_super) {
                     case 1:
                         _a.sent();
                         this.createGameScene();
-                        console.log("========runGame");
                         return [2 /*return*/];
                 }
             });
@@ -130,7 +129,6 @@ var Main = (function (_super) {
                     case 4:
                         _a.sent();
                         this.stage.removeChild(loadingView);
-                        console.log("========>loadResource");
                         return [3 /*break*/, 6];
                     case 5:
                         e_1 = _a.sent();

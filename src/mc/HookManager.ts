@@ -113,7 +113,6 @@ module goldman {
 		}
 
 		public setHookBackV(backV: number): void {
-			console.log("backV===", backV)
 			let that = this
 			that.isBack = true;
 			SoundManager.getInstance().StopPull();
@@ -145,12 +144,10 @@ module goldman {
 		public setCatchObj(obj: Obj): void {
 			this.catchObj = obj;
 			var typeStr: string = obj.image;
-			console.log("catchObj.type: " + typeStr);
 			this.hook.setBackHookType(typeStr);//设置钩子的样子
 		}
 
 		public destroy(): void {
-			console.log("删除hook")
 			this.hook.destroy();
 			this.removeChild(this.hook);
 			this.hook = null;

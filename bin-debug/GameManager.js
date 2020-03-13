@@ -18,6 +18,8 @@ var goldman;
             return this._instance;
         };
         GameManager.prototype.initGame = function () {
+            egret.ImageLoader.crossOrigin = "anonymous"; //解决跨域问题
+            this.initRequest();
             this.missionArr = RES.getRes("mission_json");
             this.gameScene = new goldman.GameScene();
             this.GameStage.addChild(this.gameScene);
@@ -44,7 +46,6 @@ var goldman;
             var self = this;
             var url = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1582977071549&di=679926970324b1383796ee137203125f&imgtype=0&src=http%3A%2F%2Fa2.att.hudong.com%2F36%2F48%2F19300001357258133412489354717.jpg";
             var imgLoader = new egret.ImageLoader();
-            imgLoader.crossOrigin = "anonymous"; // 这个好像没什么用处，加不加都可以
             imgLoader.once(egret.Event.COMPLETE, function (evt) {
                 if (evt.currentTarget.data) {
                     egret.log("加载头像成功: " + evt.currentTarget.data);
@@ -64,7 +65,7 @@ var goldman;
                     headicon.width = 100;
                     headicon.height = 100;
                     headicon.x = 325;
-                    headicon.y = 230;
+                    headicon.y = 228;
                     // self.headicon.source = renderTexture;//赋给Image组件
                     // 释放纹理
                     bitmap.texture.dispose();
@@ -72,7 +73,7 @@ var goldman;
                     var circle = new egret.Shape();
                     circle.graphics.beginFill(0x000000);
                     circle.x = 325;
-                    circle.y = 230;
+                    circle.y = 228;
                     circle.graphics.drawCircle(50, 50, 50);
                     circle.graphics.endFill();
                     this.GameStage.addChild(circle);
@@ -103,7 +104,6 @@ var goldman;
             this.onGameOver();
         };
         GameManager.prototype.onGameOver = function () {
-            console.log("gameOver!!!");
             var that = this;
             that.isOver = true;
             that.objManager.destroy();
@@ -113,7 +113,7 @@ var goldman;
                 that.GameStage.addChild(that.gameOver);
                 that.gameOver.setJinText(that.jinScore);
                 that.gameOver.setYinText(that.yinScore);
-                that.initRequest();
+                // that.initRequest()
                 that.gameOver.addEventListener(goldman.GameOver.CLOSE_GAMEOVER_EVENT, that.onDestroyGameOver, that);
                 clearTimeout(timeHandle);
             }, that, 500);
@@ -126,15 +126,14 @@ var goldman;
             goldman.Http.create()
                 .success(this.onRequestSuccess, this)
                 .error(this.onRequestError, this)
-                .add('')
-                .dataFormat(egret.URLLoaderDataFormat.TEXT);
-            // .post('https://happy.s1.anxinabc.com/api/v1/appconfig');//也可以是post方法
+                .add("x=ssss")
+                .dataFormat(egret.URLLoaderDataFormat.TEXT)
+                .post('api/v1/auth/me'); //也可以是post方法
         };
         GameManager.prototype.onRequestSuccess = function (data) {
             console.log("==>>>>", data);
         };
         GameManager.prototype.onRequestError = function () {
-            console.log("==>>>>");
         };
         GameManager.prototype.destoryGameScene = function () {
             this.GameStage.removeChild(this.gameScene);
